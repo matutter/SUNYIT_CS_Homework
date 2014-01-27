@@ -1,0 +1,182 @@
+// Problem_8_page_480.txt
+// language: JAVA
+// written by: Mathew C Utter
+// October 2013
+// Theres not a lot of comments in these because they're extremely simple... 
+// 
+import java.util.*;
+import java.text.*;
+
+///////////////////////////////////////*
+//main makes a dog and cat...         //
+*///////////////////////////////////////
+class Problem_8_page_480 { 
+  public static void main(String[] args) {
+
+		Scanner key = new Scanner(System.in);
+
+		System.out.printf("Enter new name: ");
+		String name = key.nextLine();
+		System.out.printf("Enter age: ");
+		int age = key.nextInt();
+		System.out.printf("Enter weight: ");
+		double weight = key.nextDouble();
+
+		Dog udog = new Dog(name,age,weight);
+
+		System.out.println("\nRecords as follows are: " + udog.completeness() + ".");
+		System.out.println(udog);
+		
+		Scanner key2 = new Scanner(System.in);
+
+		System.out.printf("Enter new name: ");
+		name = key2.nextLine();
+		System.out.printf("Enter age: ");
+		age = key2.nextInt();
+		System.out.printf("Enter weight: ");
+		weight = key2.nextDouble();
+
+		Cat ucat = new Cat(name,age,weight);
+
+		System.out.println("\nRecords as follows are: " + ucat.completeness() + ".");
+		System.out.println(ucat);
+  }
+}
+
+///////////////////////////////////////*
+//dog has dog specific things         //
+*///////////////////////////////////////
+class Dog extends Pet {
+	double	ace_dose = .03,
+					car_dose = .5;
+	int			ace_dilute = 10,
+					car_dilute = 12;
+	
+	public Dog(String name, int age, double weight) {
+		super(name, age, weight);
+		set_dose(ace_dose, car_dose, ace_dilute, car_dilute);
+	}
+
+	public Dog() {
+		super();
+		set_dose(ace_dose, car_dose, ace_dilute, car_dilute);
+	}
+}
+///////////////////////////////////////*
+//cat has cat specific things         //
+*///////////////////////////////////////
+class Cat extends Pet {
+	double	ace_dose = .002,
+					car_dose = .25;
+	int			ace_dilute = 10,
+					car_dilute = 12;
+
+	public Cat(String name, int age, double weight) {
+		super(name, age, weight);
+		set_dose(ace_dose, car_dose, ace_dilute, car_dilute);
+	}
+
+	public Cat() {
+		super();
+		set_dose(ace_dose, car_dose, ace_dilute, car_dilute);
+	}
+}
+///////////////////////////////////////*
+//pet has pet record things           //
+*///////////////////////////////////////
+class Pet {
+  private String name; 
+  private int age; //in years 
+  private double weight; //in pounds 
+	private double	ace_dose,
+									car_dose;
+	private int			ace_dilute,
+									car_dilute;
+
+	public void set_dose(double ace_dose, double car_dose, int ace_dilute, int car_dilute){
+	this.ace_dose = ace_dose;
+	this.car_dose = car_dose;
+	this.ace_dilute = ace_dilute;
+	this.car_dilute = car_dilute;
+	}
+
+
+	public double acepromazine(){
+		return ((this.weight/2.2)*(ace_dose/ace_dilute));
+	} 
+	public double carprofen(){
+		return ((this.weight/2.2)*(car_dose/car_dilute));
+	} 
+
+
+	public String completeness() {
+	if( this.age+this.weight > 1 && this.name != "no name set.")
+		return "Complete";
+	else
+		return "Incomplete";
+	}
+
+  public Pet(String name, int age, double weight) {
+    set(name, age, weight);
+		set_dose(0,0,0,0);
+  }
+
+  public void set(String name, int age, double weight) {
+    if( age+weight <= 1 ) {
+      System.out.println("Error: Zero or Negative age or weight.\n");
+      System.exit(0);
+    }    
+    else {
+    this.age   = age;
+    this.weight= weight;
+    this.name  = name; 
+    }
+  }
+
+  public Pet(String name) {
+    this.name  = name;
+    this.age   = 0;
+    this.weight= 0;
+  }
+
+  public Pet(int age) {
+    this.name   = "no name set.";
+    this.weight = 0;
+    if(age<0) {
+      System.out.println("Error: Zero or Negative age or weight.\n");
+      System.exit(0);
+    }    
+    else
+    this.age = age;
+  }
+
+  public Pet(double weight) {
+    this.name   = "no name set.";
+    this.age = 0;
+    if(weight<0) {
+      System.out.println("Error: Zero or Negative age or weight.\n");
+      System.exit(0);
+    }    
+    else
+    this.weight = weight;
+  }
+
+  public Pet() {
+    this.name  = "no name set.";
+    this.age   = 0;
+    this.weight= 0;
+		set_dose(0,0,0,0);
+  }
+
+  public String get_name()		{ return name; }
+  public int    get_age()			{ return age; }
+  public double get_weight()	{ return weight; }
+
+  public String toString(){
+		DecimalFormat decfor = new DecimalFormat("00.0000");
+    return ("Name:\t" + name + "\nAge:\t" + age + " years" +
+            "\nWeight: " + weight + " pounds" +
+						"\nacepromazine dose: " + decfor.format(acepromazine()) + " ml" +
+						"\ncarprofen dose:    " + decfor.format(carprofen()) + " ml\n");
+  }
+}

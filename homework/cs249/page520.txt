@@ -1,0 +1,23 @@
+mat@mat-vm:~/Code$ java Problem_8_page_520
+Enter new name: tom dog
+Enter age: 2
+Enter weight: 67
+
+Records as follows are: Complete.
+Name:	tom dog
+Age:	2 years
+Weight: 67.0 pounds
+acepromazine dose: 00.0914 ml
+carprofen dose:    01.2689 ml
+
+Enter new name: mat cat
+Enter age: 2
+Enter weight: 67
+
+Records as follows are: Complete.
+Name:	mat cat
+Age:	2 years
+Weight: 67.0 pounds
+acepromazine dose: 00.0061 ml
+carprofen dose:    00.6345 ml
+

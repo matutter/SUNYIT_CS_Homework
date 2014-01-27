@@ -1,0 +1,35 @@
+hw3Output.txt
+
+mat@mat-vm:~/Code$ java homework_3_java
+Pizza[0]
+Pizza Description:
+Size		small
+Cheeses		#0
+Pepperoni	#0
+Hams  		#1
+Total:		$12.0
+
+Pizza[1]
+Pizza Description:
+Size		medium
+Cheeses		#1
+Pepperoni	#2
+Hams  		#2
+Total:		$22.0
+
+Pizza[2]
+Pizza Description:
+Size		large
+Cheeses		#2
+Pepperoni	#4
+Hams  		#3
+Total:		$32.0
+
+Pizza[3]
+Pizza Description:
+Size		small
+Cheeses		#3
+Pepperoni	#6
+Hams  		#4
+Total:		$36.0
+

@@ -1,0 +1,47 @@
+How many pizza orders would you like to make?  
+3
+How many pizzas are in order [0]?  
+2
+How many pizzas are in order [1]?  
+1
+How many pizzas are in order [2]?  
+3
+ORDER:		#0
+PIZZA(s):	 2
+ORDER TOTAL:	$34.0
+
+ORDER:		#1
+PIZZA(s):	 1
+ORDER TOTAL:	$12.0
+
+ORDER:		#2
+PIZZA(s):	 3
+ORDER TOTAL:	$66.0
+
+What order would you like to make a copy of?
+2
+Pizza[0]
+Pizza Description:
+Size		small
+Cheeses		#0
+Pepperoni	#0
+Hams  		#1
+Total:		$12.0
+Pizza[1]
+Pizza Description:
+Size		medium
+Cheeses		#1
+Pepperoni	#2
+Hams  		#2
+Total:		$22.0
+Pizza[2]
+Pizza Description:
+Size		large
+Cheeses		#2
+Pepperoni	#4
+Hams  		#3
+Total:		$32.0
+
+ORDER TOTAL:	$66.0
+
+

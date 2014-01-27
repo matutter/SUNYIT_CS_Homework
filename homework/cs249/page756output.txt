@@ -1,0 +1,2 @@
+mat@mobile:~/code/now$ java problem_10_page_756_part1
+[Circle:area{52.81086034186181}, Rectangle:area{79.2}, Righty!!!:area{14.49}, non-classic:area{15.0}]

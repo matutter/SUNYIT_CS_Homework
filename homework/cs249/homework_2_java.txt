@@ -1,0 +1,61 @@
+// homework_2_java.txt
+// language: JAVA
+// written by: Mathew C Utter
+// September 2013
+// 
+import java.util.*;
+import java.text.*;
+
+class homework_2_java {
+static int count=0;
+	public static void main(String[] args) {
+  int earn=0, max=0, n=3;
+  System.out.printf ("\nThis program will gather information on three classroom exercises.\n"
+  + "A percentage will be calculated from the information and displayed in a table.\n");
+
+  DataClass[] student = new DataClass[n];
+  for (int i=0;i<n;i++ ) 
+    student[i] = new DataClass(scan().nextLine(),scan().nextInt(),scan().nextInt());
+
+  for (int i=0;i<n;i++ ) {
+    earn+= student[i].score;
+    max += student[i].max;
+    }
+
+  System.out.println("\nAssignment\tScore\t\tTotal Possible");
+  for (int i=0;i<n;i++ )
+  System.out.println(student[i].name+"\t\t"+student[i].score+"\t\t"+student[i].max);
+
+  double frac;
+  frac = ((double)earn/(double)max)*100;
+  
+  DecimalFormat decfor = new DecimalFormat("00.00");
+  System.out.println("Your total is " + earn + " out of " + max +", or " + decfor.format(frac) + "%\n");
+
+	}
+public static Scanner scan() {
+    talk();
+		Scanner s = new Scanner(System.in);
+		return  s;
+  }
+public static void talk() {
+  count++;
+  switch (count) {
+  case 1: System.out.printf("\nAssignment Name:  "); break;
+  case 2: System.out.printf("Points Earned  :  "); break;
+  case 3: System.out.printf("Points Possible:  ");
+          count = 0; break;
+    }
+  }
+}
+
+class DataClass {
+    String  name;
+    int     score, max;  
+	public DataClass(String name, int score, int max){		
+  this.name = name;
+  this.score= score;
+  this.max  = max;
+  if ( score > max ) throw new IllegalArgumentException("Points earned cannot be higher than points possible.");
+	}
+}

@@ -1,0 +1,7 @@
+mat@mobile:~/Desktop$ java problem_4_page_799
+java.lang.Double[OK]
+The standard deviation of
+[5.0, 19.0, 14.0, 26.0, 16.0, -3.0, 5.0, 10.0]
+ is 8.671072598012312
+
+

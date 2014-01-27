@@ -1,0 +1,129 @@
+// homework_5_java.txt
+// language: JAVA
+// written by: Mathew C Utter
+// September 2013
+// 
+import java.util.*;
+import java.text.*;
+
+class homework_5_java {
+  public static void main(String[] args) {
+//how many pizza orders
+    System.out.println("How many pizza orders would you like to make?  ");  
+    int numOrders = getInt();
+    PizzaOrder[] order = new PizzaOrder[numOrders];
+//how many pizzas on each order  
+    for (int i=0;i<numOrders;i++ ){
+      System.out.println("How many pizzas are in order [" + i +"]?  ");
+      int pizzas = getInt();
+      if (pizzas > 3 ) throw new IllegalArgumentException("THATS TOO MANY PIZZAS!!");
+      order[i] = new PizzaOrder(pizzas);
+    }
+//show order# #pizzas and orderTotal
+    for (int i=0;i<numOrders;i++ )
+    System.out.println("ORDER:\t\t#" + i +
+    "\nPIZZA(s):\t " + order[i].getNumPizzas() + 
+    "\nORDER TOTAL:\t$" + order[i].calcTotal() + "\n");
+
+//make a copy and display its pizza contents
+  System.out.println("What order would you like to make a copy of?");
+  PizzaOrder copy = new PizzaOrder(1);
+  copy = order[getInt()];
+  System.out.println(copy.collectDescr()+"\nORDER TOTAL:\t$" + copy.getTotal() + "\n");
+  }
+  public static int getInt(){
+    Scanner s = new Scanner(System.in);
+    return s.nextInt();
+   }
+}
+
+class PizzaOrder{
+    private double  orderTotal=0;
+    private String  orderDescr="";
+    private int     numPizzas;
+    private Pizza[] pizzas;
+    
+  public PizzaOrder(int numPizzas){
+    this.numPizzas=numPizzas;
+    setNumPizzas(this.numPizzas);
+    calcTotal();
+  }
+
+  public void setNumPizzas(int numPizzas){
+    pizzas = new Pizza[numPizzas];
+    for (int i=0;i<numPizzas;i++ ) 
+      pizzas[i] = new Pizza(whatSize(i+1),i,i+i,i+1);
+  }
+
+  public static String whatSize(int i){    
+    switch (i){
+    case 1: return "small";
+    case 2: return "medium"; 
+    case 3: return "large";
+    }
+    return "small";
+  }
+
+  public double calcTotal(){
+    for (int i=0;i<numPizzas;i++ ) 
+      orderTotal+=pizzas[i].calcCost();
+    return orderTotal/2;
+  }
+
+  public String collectDescr(){
+    for (int i=0;i<numPizzas;i++ ) 
+      orderDescr+=("Pizza["+i+"]\n"+pizzas[i].getDescription());
+    return orderDescr;  
+  }
+
+  public String getDescr(){
+  return orderDescr;
+  }
+  public double getTotal(){
+  return orderTotal/2;
+  } 
+  public int getNumPizzas(){
+  return numPizzas;
+  }
+}
+
+class Pizza {
+  private String  size;
+  private int     numCheese,
+                  numPep,
+                  numHam;
+	public Pizza(String size, int numCheese, int numPep, int numHam) {		
+    this.size     = size;
+    this.numCheese= numCheese;
+    this.numPep   = numPep;
+    this.numHam   = numHam;
+	}
+
+  public double calcCost(){
+    if ( size == "small" )
+      return 10+2*numCheese+2*numPep+2*numHam;
+    else if ( size == "medium" )
+      return 12+2*numCheese+2*numPep+2*numHam;
+    else
+      return 14+2*numCheese+2*numPep+2*numHam;
+  }
+
+  public String getDescription(){
+    return ("Pizza Description:\nSize\t\t"+size+"\nCheeses\t\t#"+numCheese+
+            "\nPepperoni\t#"+numPep+"\nHams  \t\t#"+numHam+"\n"+
+            "Total:\t\t$"+calcCost()+"\n");
+  }  
+//assessors
+  public String getSize(){
+    return this.size;
+  }
+  public int getCheese(){
+    return this.numCheese;
+  }
+  public int getPep(){
+    return this.numPep;
+  }
+  public int getHam(){
+    return this.numHam;
+  }
+}
