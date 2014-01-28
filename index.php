@@ -26,8 +26,8 @@
 <div class="col-sm-2 nav-side">
 	<ul class="nav nav-pills nav-stacked">
 		<li class="active" id="cs249"><a href="#">CS249</a></li>
-		<li id="cs350"><a href="#">CS351</a></li>
-		<li id="cs350"><a href="#">CS445</a></li>
+		<li id="cs351"><a href="#">CS351</a></li>
+		<li id="cs445"><a href="#">CS445</a></li>
 		<li id="other"><a href="#">Other</a></li>
 		<br>
 		<br>
