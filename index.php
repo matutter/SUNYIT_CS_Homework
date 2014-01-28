@@ -5,22 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="icon" href="../images/favicon.ico">
+<link rel="icon" href="images/favicon.ico">
 
-<link rel="stylesheet" href="../css/bootstrap.min.css"/>
-<link rel="stylesheet" href="../css/main.css"/>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/main.css"/>
 <!--[if 1t IE 7]>
 <script type="text/javascript" src="js/DD_belatedPNG_0.0.7a-min.js">
 <![endif]-->
-<script src="../scripts/jquery-1.11.0.min.js"></script>
-<script src="../scripts/bootstrap.min.js"></script>
-<script src="../scripts/main.js"></script>
+<script src="scripts/jquery-1.11.0.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/main.js"></script>
 
 <title>utterm@sunyit.edu</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse" role="navigation">
-	<div class="navbar-brand"> <img src="../images/utterm.png"> </div>
+	<div class="navbar-brand"> <img src="images/utterm.png"> </div>
 </nav>
 
 <div class="col-sm-2 nav-side">
