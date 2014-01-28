@@ -1,3 +1,6 @@
+<?php
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,14 +20,27 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse" role="navigation">
-	<ul class="nav nav-tabs">
-		<li > <a href="http://www.matutter.com"><img src="../images/utterm.png"></a>	</li>
-		<li class="active" id="cs249"><a href="#"><!--CS349--><img src="../images/cs249.png"></a></li>
-		<li id="cs350"><a href="#"><!--CS350--><img src="../images/cs350.png"></a></li>
-		<li id="other"><a href="#"><!--Other--><img src="../images/other.png"></a></li>
-	</ul>
-</nav>
+ <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="../images/utterm.png"></a>
+        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav nav-tabs">
+				<li class="active" id="cs249"><a href="#">CS249</a></li>
+				<li id="cs350"><a href="#">CS350</a></li>
+				<li id="cs350"><a href="#">CS350</a></li>
+				<li id="other"><a href="#">Other</a></li>
+			</ul>
+	        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
 
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default ">

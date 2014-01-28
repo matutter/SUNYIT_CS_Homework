@@ -1,8 +1,12 @@
-html, .panel-group
+@font-face
+{
+	font-family: Eroded;
+	src: url(PressFeelingEroded.ttf);
+}
+html
 {
 	background-color:#0769AD;
 }
-
 body
 {
 	background-color:#0769AD;
@@ -19,16 +23,26 @@ ul, nav
 nav, .navbar
 {
 	border-radius: 0px !important;
-	height: 62px;
+	height: 68px;
+	z-index: 10;
 }
 nav li a, nav li a:active
 {
-	height: calc(62px - 4px);
+	height: calc(68px - 4px);
 	background-color: transparent;
 	border-width: 0px;
 	border-radius: 2px !important;
-	font-size: 1.2em;
-	font-weight: 700;
+}
+ul
+{
+	background-color: #222;
+	overflow: hidden;
+}
+.navbar-collapse, .container
+{
+	margin: 0px !important;
+	padding: 0px !important;
+	overflow:-y: hidden;
 }
 nav>li>a:hover, nav li:active
 {
@@ -42,12 +56,19 @@ nav li
 nav li a
 {
 	padding-top: 0px;
+	font-family: Eroded !important;
+	font-size: 52px;
+	text-align: center;
+	color: white !important;
 }
-
+.navbar-brand
+{
+	padding: 2px; 
+	margin-left: 8.333333333333332%;
+}
 nav li:nth-child(1)
 {
 	margin-left: calc(8.333333333333332% + 15px);
-	margin-top: -4px;
 }
 li.active>a
 {
@@ -64,10 +85,6 @@ li.active>a
 	background: -ms-linear-gradient(top,  #003e91 0%,#0769ad 56%); /* IE10+ */
 	background: linear-gradient(to bottom,  #003e91 0%,#0769ad 56%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003e91', endColorstr='#0769ad',GradientType=0 ); /* IE6-9 */
-	font-size: 1.2em;
-	font-weight: 700;
-	text-shadow: 0px 0px 3px #7acef4;
-	color: #111 !important;
 }
 li>a
 {
@@ -75,7 +92,7 @@ li>a
 }
 .nav-tabs
 {
-	height: 62px;
+	height: 68px;
 }
 .nav-tabs li a:hover
 {
