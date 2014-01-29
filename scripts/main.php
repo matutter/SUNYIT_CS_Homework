@@ -9,7 +9,7 @@ if($_POST && isset($_POST["loadPage"]))
 	if (is_dir($log_directory)) {
 		if ($handle = opendir($log_directory)) {
 			while(($file = readdir($handle)) !== FALSE)
-				if($file == "." || $file == ".."); else
+				if($file == "." || $file == ".." || $file == ".gitignore"); else
 				$res .= $file.",";
 			closedir($handle);
 		}

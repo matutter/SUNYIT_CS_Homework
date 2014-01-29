@@ -12,7 +12,7 @@ function loadPage(s) {
 				return;
 			}
 			$(res).each(function(i){
-				$('#files').append('<li><a link="../homework/'+s+'/'+res[i]+'">'+res[i]+'</a></li>')	
+				$('#files').append('<li><a link="homework/'+s+'/'+res[i]+'">'+res[i]+'</a></li>')	
 			})
 			$('#files').append("</ul>")
 		}
