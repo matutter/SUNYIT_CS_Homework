@@ -41,10 +41,11 @@
 
 <div class="col-sm-offset-1 col-sm-8">
 	<div class="panel panel-default ">
-	  <div class="panel-heading"><h3>Homework</h3></div>
-	  <div class="panel-body">
-	    
-	  </div>
+		<div class="panel-heading"><h3>Homework</h3></div>
+		<div class="panel-body">
+			<div id="files" class="col-sm-3"></div>
+			<div id="code" class="col-sm-9 code"></div>
+		</div>
 	</div>
 </div>
 
@@ -53,18 +54,22 @@
 </body>
 <script>
 $(document).ready(function(){
-	loadPage("cs249")
+	var last = "cs249"
+
+	loadPage(last)
 
 	$('.panel-body').on('click','a',function(){
 		var link = $(this).attr('link')
-		$(".panel-body").load(link, function(res) {
-		    $(".panel-body").append(res.replace(/\r\n/gi, "<br>"))
+		$("#code").load(link, function(res) {
+		    $("#code").append(res.replace(/\r\n/gi, "<br>"))
 		})
 	})
 
 	$('.nav li').click(function(){
-		$('.panel-body').empty()
+		$('#files').empty()
 		$(this).addClass('active').siblings().removeClass('active')
+		last = $(this).attr('id')
+
 		loadPage($(this).attr('id'))
 	})
 })

@@ -5,12 +5,16 @@ function loadPage(s) {
 		url: "scripts/main.php",
 		data: {loadPage:s},
 		success: function(res) {
-
+			$('#files').prepend("<ul>")
 			res = res.split(',')
-			if(res.length < 2) return;
+			if(res.length < 2) {
+				$('#files').prepend("No files")
+				return;
+			}
 			$(res).each(function(i){
-				$('.panel-body').append('<li><a link="../homework/'+s+'/'+res[i]+'">'+res[i]+'</a></li>')	
+				$('#files').append('<li><a link="../homework/'+s+'/'+res[i]+'">'+res[i]+'</a></li>')	
 			})
+			$('#files').append("</ul>")
 		}
 	})
 }

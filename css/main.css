@@ -31,7 +31,7 @@ nav, .nav-pills, .nav-stacked
 .nav-pills li a
 {
 	font-family: Eroded !important;
-	font-size: 3.0em;
+	font-size: 4.1em;
 	color:white;
 	margin-left: 10%;
 	width: 80%;
@@ -42,11 +42,12 @@ nav, .nav-pills, .nav-stacked
 {
 	outline: none !important;
 	background-color: transparent !important;
-	font-size: 3.05em;
+	font-size: 4.15em;
 }
 .nav-pills li a:nth-child(1)
 {
 	margin-top: 0px !important;
+	border-top-right-radius: 0px !important;
 }
 .active>a
 {
@@ -99,6 +100,10 @@ nav, .nav-pills, .nav-stacked
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius:2px;
 }
+.navbar-brand
+{
+	margin-left: calc(2.333333333333332% + 15px);
+}
 .navbar-right
 {
 	margin-right: calc(8.333333333333332% + 15px);
@@ -121,4 +126,17 @@ h3
 {
 	padding: 0px;
 	margin: 0px;
+}
+.code
+{
+	font-family: "Lucida Console", Monaco, monospace;
+}
+li
+{
+	list-style: none;
+	padding-left: 2%;
+}
+.panel-body li:nth-child(odd)
+{
+	background-color: #444;
 }
