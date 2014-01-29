@@ -54,6 +54,14 @@
 <script>
 $(document).ready(function(){
 	loadPage("cs249")
+
+	$('.panel-body').on('click','a',function(){
+		var link = $(this).attr('link')
+		$(".panel-body").load(link, function(res) {
+		    $(".panel-body").append(res.replace(/\r\n/gi, "<br>"))
+		})
+	})
+
 	$('.nav li').click(function(){
 		$('.panel-body').empty()
 		$(this).addClass('active').siblings().removeClass('active')

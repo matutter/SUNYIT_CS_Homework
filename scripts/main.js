@@ -9,7 +9,7 @@ function loadPage(s) {
 			res = res.split(',')
 			if(res.length < 2) return;
 			$(res).each(function(i){
-				$('.panel-body').append('<li><a href="../homework/'+s+'/'+res[i]+'">'+res[i]+'</a></li>')	
+				$('.panel-body').append('<li><a link="../homework/'+s+'/'+res[i]+'">'+res[i]+'</a></li>')	
 			})
 		}
 	})

@@ -92,6 +92,7 @@ nav, .nav-pills, .nav-stacked
 }
 .panel-body
 {
+	white-space: pre-line;
 	color: #EFE;
 	min-height: 500px;
 	background-color: #333;
