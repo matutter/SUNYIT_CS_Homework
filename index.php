@@ -37,7 +37,7 @@
 	<div class="panel panel-default ">
 		<div class="panel-heading"><h3>Homework</h3></div>
 		<div class="panel-body">
-			<div id="files" class="col-sm-3"></div>
+			<div id="files" class="col-sm-3 files"></div>
 			<div id="code" class="col-sm-9 code"></div>
 		</div>
 	</div>
@@ -54,8 +54,8 @@ $(document).ready(function(){
 
 	$('.panel-body').on('click','a',function(){
 		var link = $(this).attr('link')
-		$("#code").load(link, function(res) {
-		   // $("#code").append(res.replace(/\r\n/gi, "<br>"))
+		$.get(link, function(s){
+			$('#code').text(s) //load as text not a file
 		})
 	})
 

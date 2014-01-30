@@ -129,10 +129,12 @@ h3
 }
 .code
 {
+	background-color: black;
+	color: white;
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
-.code li
+.files li
 {
 	list-style: none;
 	padding-left: 2%;

@@ -42,13 +42,12 @@ int main(int argc, char const *argv[])
 				wait(&status);	//double tap
 		}
 		else
-		{
-			noRace();		
-
+		{	
+			noRace();
 			printf("Enter filenames until you're happy. 'die' to end.\n");
 			scanf("%s", fname);
-			if(!strcmp(fname,"die")) return 0;
-			pid = fork();
+			if(!strcmp(fname,"die")) break;
+			pid = fork();	
 		}
 
 	}
@@ -62,6 +61,7 @@ static void handler(int signo) {
 
 void noRace() {
 	int i;
-	for( i=0;i<3;i++ )
-		for( i=0;i<100000000;i++ );
+//	for( i=0;i<3;i++ )
+//		for( i=0;i<100000000;i++ );
+sleep(1);
 }
