@@ -5,80 +5,32 @@
 }
 html
 {
-  background-color:#0769AD;
+	background-color:#FDFDFD;
 }
 body
 {
-  background-color:#0769AD;
+  background-color:#FFF;
   width: 100%;
   margin: auto;
 }
-nav
+nav, header
 {
 	border-radius: 0px !important; 
-	border-color: #7acef4 !important;
 	margin-bottom: 0px !important;
+	background-color: #FFF;
 }
-nav, .nav-pills, .nav-stacked
+header a
 {
-	background-color: #222 !important;
-	border-top-width: 0px !important;
-	border-color: #7acef4;
-	border-radius: 0px;
-	border-width: 1px;
-	border-style: solid;
+	color: ;
 }
-.nav-pills li a
+.major-nav{}
+.icon-bar
 {
-	font-family: Eroded !important;
-	font-size: 4.1em;
-	color:white;
-	margin-left: 10%;
-	width: 80%;
-	margin-bottom: 14px !important;
-	margin-top: 14px !important;
+	background-color: #222;
 }
-.nav-pills li a:hover
+.active
 {
-	outline: none !important;
-	background-color: transparent !important;
-	font-size: 4.15em;
-}
-.nav-pills li a:nth-child(1)
-{
-	margin-top: 0px !important;
-	border-top-right-radius: 0px !important;
-}
-.active>a
-{
-	width: calc(90% + 2px)!important;
-	margin-right: -2px !important;
-	border-radius: 0px !important;
-	border-top-left-radius: 2px !important;
-	border-bottom-left-radius:2px !important;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #7acef4 !important;
-	border-right-color: #0769AD !important;
-	background-image: -webkit-gradient(
-		linear,
-		left top,
-		right top,
-		color-stop(0, #06263B),
-		color-stop(1, #0768AD)
-	);
-	background-image: -o-linear-gradient(right, #06263B 0%, #0768AD 100%);
-	background-image: -moz-linear-gradient(right, #06263B 0%, #0768AD 100%);
-	background-image: -webkit-linear-gradient(right, #06263B 0%, #0768AD 100%);
-	background-image: -ms-linear-gradient(right, #06263B 0%, #0768AD 100%);
-	background-image: linear-gradient(to right, #06263B 0%, #0768AD 100%);
-}
-.nav-side
-{
-	margin-left: 0px !important;
-	margin-top: -1px !important;
-	padding-left: 0px !important;
-	margin-bottom: 0px;
+	background-color: #f1f1f1;
 }
 .panel
 {
@@ -101,28 +53,6 @@ nav, .nav-pills, .nav-stacked
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius:2px;
 }
-.navbar-brand
-{
-	margin-left: calc(50% - 90.5px);
-}
-.navbar-right
-{
-	margin-right: calc(8.333333333333332% + 15px);
-}
-.well
-{
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	margin: 0px;
-	border-radius: 0px;
-	border-width: 0px;
-	border-top-width: 2px;
-	border-style: solid;
-	border-color: #333;
-	background-color: #555;
-	box-shadow: 0px 0px 12px #111;
-}
 h3
 {
 	padding: 0px;
@@ -131,22 +61,44 @@ h3
 }
 .code
 {
-	background-color: black;
-	color: white;
+	background-color: #DDD;
+	color: #222;
+	white-space: pre-line;
 	font-family: "Lucida Console", Monaco, monospace;
 	overflow-x:scroll;
 }
-
+.files
+{
+	margin-bottom: 15px;
+	padding-left: 0px;
+}
 .files li
 {
 	list-style: none;
 	padding-left: 2%;
-	overflow:hidden;
+	overflow-x:hidden;
 	cursor: pointer;
 }
-.panel-body li:nth-child(odd)
+.files li:nth-child(odd)
 {
 	background-color: #DDD;
+}
+
+.nav-bot
+{
+	background-color: #0080ff;
+	height: 5px;
+	margin-bottom: 15px !important;
+
+}
+.sub-nav
+{
+	width: 100%;
+	background-image:url('../images/back.png') !important;
+	background-attachment: scroll;
+	background-size: 40%;
+	background-repeat: repeat;
+	color: white;
 }
 .download
 {
@@ -156,4 +108,32 @@ h3
 	display: inline-block;
 	border-color: #428bca;
 	float: right;
+}
+.login
+{
+	margin-left:30% !important;
+	margin-right: 30% !important;
+}
+.login input
+{
+	width: 20%;
+}
+.alt-msg
+{
+	color: #EEE;
+	text-align: center;
+	margin: 20px;
+	padding: 5px;
+	width: auto;
+	background-color: transparent;
+	border-color: #DDD;
+	border-radius: 3px;
+	border-width: 1px;
+	border-style: solid;
+	box-shadow: inset 0px 0px 3px #222;
+}
+.alt-msg h1
+{
+	margin: 0px;
+	padding: 0px !important;
 }
