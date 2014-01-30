@@ -131,10 +131,12 @@ h3
 {
 	font-family: "Lucida Console", Monaco, monospace;
 }
-li
+
+.code li
 {
 	list-style: none;
 	padding-left: 2%;
+	overflow:hidden;
 }
 .panel-body li:nth-child(odd)
 {

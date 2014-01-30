@@ -30,12 +30,6 @@
 		<li id="cs445"><a href="#">CS445</a></li>
 		<li id="other"><a href="#">Other</a></li>
 		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br><br><br><br><br><br><br><br><br><br>
 	</ul>
 </div>
 
@@ -61,7 +55,7 @@ $(document).ready(function(){
 	$('.panel-body').on('click','a',function(){
 		var link = $(this).attr('link')
 		$("#code").load(link, function(res) {
-		    $("#code").append(res.replace(/\r\n/gi, "<br>"))
+		   // $("#code").append(res.replace(/\r\n/gi, "<br>"))
 		})
 	})
 
