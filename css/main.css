@@ -87,22 +87,23 @@ nav, .nav-pills, .nav-stacked
 }
 .panel-heading
 {
-	background-color: #333 !important;
+	background-color: #CCC !important;
 	border-color: #555 !important;
-	color: white !important;
+	color: #222 !important;
+	height: 52px;
 }
 .panel-body
 {
 	white-space: pre-line;
 	color: #EFE;
 	min-height: 500px;
-	background-color: #333;
+	background-color: #EEE;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius:2px;
 }
 .navbar-brand
 {
-	margin-left: calc(2.333333333333332% + 15px);
+	margin-left: calc(50% - 90.5px);
 }
 .navbar-right
 {
@@ -126,12 +127,14 @@ h3
 {
 	padding: 0px;
 	margin: 0px;
+	display: inline-block;
 }
 .code
 {
 	background-color: black;
 	color: white;
 	font-family: "Lucida Console", Monaco, monospace;
+	overflow-x:scroll;
 }
 
 .files li
@@ -139,8 +142,18 @@ h3
 	list-style: none;
 	padding-left: 2%;
 	overflow:hidden;
+	cursor: pointer;
 }
 .panel-body li:nth-child(odd)
 {
-	background-color: #444;
+	background-color: #DDD;
+}
+.download
+{
+	margin-top: -5px;
+	background-color: transparent;
+	color:#428bca;
+	display: inline-block;
+	border-color: #428bca;
+	float: right;
 }

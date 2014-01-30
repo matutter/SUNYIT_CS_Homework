@@ -35,7 +35,11 @@
 
 <div class="col-sm-offset-1 col-sm-8">
 	<div class="panel panel-default ">
-		<div class="panel-heading"><h3>Homework</h3></div>
+		<div class="panel-heading">
+			<h3 id="title">Homework</h3>
+			<button class="btn btn-default download">GetSource</button>
+
+		</div>
 		<div class="panel-body">
 			<div id="files" class="col-sm-3 files"></div>
 			<div id="code" class="col-sm-9 code"></div>
@@ -49,11 +53,16 @@
 <script>
 $(document).ready(function(){
 	var last = "cs249"
-
+	var link = ""
+	var fname= ""
+	$('.download').hide()
 	loadPage(last)
 
-	$('.panel-body').on('click','a',function(){
-		var link = $(this).attr('link')
+	$('.files').on('click','a',function(){
+		link = $(this).attr('link')
+		fname = $(this).text()
+		$('#title').html(fname)
+		$('.download').show()
 		$.get(link, function(s){
 			$('#code').text(s) //load as text not a file
 		})
@@ -63,8 +72,14 @@ $(document).ready(function(){
 		$('#files').empty()
 		$(this).addClass('active').siblings().removeClass('active')
 		last = $(this).attr('id')
-
 		loadPage($(this).attr('id'))
+	})
+
+	$('.download').click(function(){
+		var pom = document.createElement('a')
+		pom.setAttribute('href', link)
+		pom.setAttribute('download', fname)
+		pom.click()
 	})
 })
 
