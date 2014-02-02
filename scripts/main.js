@@ -57,6 +57,7 @@ function tryToLogin() {
 	    		$('.mask').remove()
 	    		$('.login').slideToggle('fast')
 	    		$('.console input, .console button').prop('disabled', false)
+				$('nav #login').text('Logout').attr('id',"logout")
 	    	}
 	    }
 	})
