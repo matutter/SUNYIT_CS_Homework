@@ -5,8 +5,17 @@
 \\____________________//
 *///				\\\*
 
-$username = "mat";
-$password = "mat";
+	$ini = file_get_contents('user.ini', true);
+	$ini = preg_replace("/#.*#/i","",$ini);
+	$ini = explode("\r\n", $ini);
+	$username = $ini[0];
+	$password = $ini[1];
+	$init = array(
+		"sb" => $ini[2],	//0 to hide banner, 1 to show
+		"dn" => $ini[3],	//display name
+		"em" => $ini[4],	//Email
+		"st" => $ini[5],	//Subtext underneath email
+	);
 
 if( $_POST && isset($_POST["login"]) ) {
 	$res = str_replace("uname=","",$_POST["login"]);
@@ -33,13 +42,7 @@ if( $_POST && isset($_POST["out"]) ) {
 }
 
 if($_POST && isset($_POST["init"])) {
-	$init = array(
-		"sb" => "0",									//0 to hide banner, 1 to show
-		"dn" => "Mat Utter",							//display name
-		"em" => "utterm@sunyit.edu",					//Email
-		"st" => "See my <a href=\"\">Github</a>",				//Subtext underneath email
-		"li" => "http://www.github.com/matutter",		//the Href of a <li></li> in the subtext
-	);
+
 	echo json_encode($init);
 }
 //echo "I should be secret";

@@ -28,13 +28,12 @@ function initUser(l) {
 	$.ajax({
 	    type: "POST",
 	    dataType: "json",
-	    url: "settings.php",
+	    url: "/scripts/settings.php",
 	    data: {init:"start"},
 	    success: function(res){
 	    	$('.display-name').text(res.dn)
 	    	$('.alt-msg .email').text(res.em)
 	    	$('.alt-msg p').html(res.st)
-	    	$('.alt-msg a').attr('href',res.li)
 	    	if(res.sb == 0) { 
 	    		$('.sub-nav').hide();
 				$('#sb').text("Off")
@@ -42,7 +41,6 @@ function initUser(l) {
 	    	$('#dn').attr('value',res.dn)
 	    	$('#em').attr('value',res.em)
 	    	$('#st').attr('value',res.st)
-	    	$('#li').attr('value',res.li)
 		}
 	})
 }
@@ -50,15 +48,16 @@ function initUser(l) {
 function tryToLogin() {
 	$.ajax({
 	    type: "POST",
-	    url: "settings.php",
+	    url: "/scripts/settings.php",
 	    data: {login:JSON.stringify($('form#login').serialize())},
 	    success: function(res){
 	    	if(res == 1) {
 	    		$('.mask').remove()
 	    		$('.login').slideToggle('fast')
 	    		$('.console input, .console button').prop('disabled', false)
-				$('nav #login').text('Logout').attr('id',"logout")
+	    		$('nav #login').text('Logout').attr('id',"logout")
 	    	}
+	    	else $('.login').effect('shake')
 	    }
 	})
 }
@@ -66,7 +65,7 @@ function tryToLogin() {
 function logOut() {
 	$.ajax({
 	    type: "POST",
-	    url: "settings.php",
+	    url: "scripts/settings.php",
 	    data: {out:1},
 	    success: function(res){
 	    	location.reload();
@@ -119,8 +118,8 @@ $(document).ready(function(){
 		$('.sub-nav').slideToggle()
 	})
 	$('nav #login').click(function(){ 
-		if($(this).attr('id') == 'logout') logOut();
-		$('.login').slideToggle('fast')
+		if($(this).attr('id') == 'logout') logOut()
+			else $('.login').slideToggle('fast')
 	})
 	$('form a#login').click(function(){ tryToLogin(); })
 

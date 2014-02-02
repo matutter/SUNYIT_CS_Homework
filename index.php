@@ -49,7 +49,7 @@ else
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" id="manage">Manage</a></li>
 				<li><a href="#" id="back">Back</a></li>
-				<li><a href="#" id="login">Login</a></li>
+				<li><a href="#" id="login" tabindex="8">Login</a></li>
 				<li><a href="#">Help</a></li>
 			</ul>
 		</nav>
@@ -74,16 +74,18 @@ else
 </div>
 <div class="nav-bot"></div>
 <div class="login">
-	<div class="col-sm-6 pull-right">
-		<form class="navbar-form navbar-left" id="login" action="" >
+	<div class="col-sm-12">
+	<div class="container">
+		<form class="navbar-form navbar-right" id="login" action="" >
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Username" id="login" name="uname">
+				<input type="text" class="form-control" placeholder="Username" id="login" name="uname" tabindex="9">
 			</div>
 			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Password" id="login" name="pwd">
+				<input type="password" class="form-control" placeholder="Password" id="login" name="pwd" tabindex="10">
 			</div>
-			<a class="btn btn-default" id="login">Login</a>
+			<a class="btn btn-default" id="login" tabindex="11">Login</a>
 		</form>
+	</div>
 	</div>
 </div>
 <div class="col-sm-12" id="main">
@@ -151,10 +153,6 @@ else
 					<tr>
 						<td colspan="0">Email sub-text</td>
 						<td colspan="10"><input type="text" class="form-control" placeholder="sub-text" id="st"></td>
-					</tr>
-					<tr>
-						<td colspan="0">Link in sub-text</td>
-						<td colspan="10"><input type="text" class="form-control" placeholder="link" id="li"></td>
 					</tr>				
 				</tbody>
 			</table>			
@@ -174,5 +172,6 @@ $(document).ready(function() {
 </script>
 
 </body>
+<script src="scripts/jquery-ui-1.10.4.custom.min.js"></script>
 <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">-->
 </html>
