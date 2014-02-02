@@ -6,6 +6,7 @@
 html
 {
 	background-color:#FDFDFD;
+	overflow-y:scroll;
 }
 body
 {
@@ -21,7 +22,7 @@ nav, header
 }
 header a
 {
-	color: ;
+	text-align: center;
 }
 .major-nav{}
 .icon-bar
@@ -114,10 +115,7 @@ h3
 	margin-left:30% !important;
 	margin-right: 30% !important;
 }
-.login input
-{
-	width: 20%;
-}
+
 .alt-msg
 {
 	color: #EEE;
@@ -136,4 +134,49 @@ h3
 {
 	margin: 0px;
 	padding: 0px !important;
+	overflow: hidden;
+}
+small
+{
+	margin-top: 16px;
+}
+
+
+.class { }
+.input
+{
+	height: 64px;
+	width: 100%;
+	margin: 128px;
+}
+.mask
+{
+	position: fixed;
+	width: 100%;
+	height:100%;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	background-color: rgba(0,0,0,0.4);
+	z-index: 9;
+}
+td
+{
+	border-width: 0px !important;
+}
+.dropdown:hover
+{
+	background-color: #f1f1f1;
+}
+.login
+{
+	position: absolute;
+	z-index: 10;
+	padding: 2px;
+	background-color: transparent;
+	margin-top: -21px;
+	width: 100%;
+	margin-left: 0px!important;
+	height: 42px;
 }
