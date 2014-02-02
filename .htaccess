@@ -1,9 +1,0 @@
-<Directory />
-Allowoverride All
-</Directory>
-
-
-<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
-Order Allow,Deny
-Deny from all
-</FilesMatch>

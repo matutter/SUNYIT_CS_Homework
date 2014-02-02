@@ -4,18 +4,12 @@
 //     don't share    \\
 \\____________________//
 *///				\\\*
-
-	$ini = file_get_contents('user.ini', true);
-	$ini = preg_replace("/#.*#/i","",$ini);
-	$ini = explode("\r\n", $ini);
-	$username = $ini[0];
-	$password = $ini[1];
-	$init = array(
-		"sb" => $ini[2],	//0 to hide banner, 1 to show
-		"dn" => $ini[3],	//display name
-		"em" => $ini[4],	//Email
-		"st" => $ini[5],	//Subtext underneath email
-	);
+define('UserName',"mat");
+define('PassWord',"mat");
+define('ShowBanner',"0");
+define('DisplayName',"Mat Utter");
+define('Email',"utterm@sunyit.edu");
+define('SubText','See my <a href="http://www.github.com/matutter">Github</a>');
 
 if( $_POST && isset($_POST["login"]) ) {
 	$res = str_replace("uname=","",$_POST["login"]);
@@ -23,7 +17,7 @@ if( $_POST && isset($_POST["login"]) ) {
 	$res = str_replace("\"","",$res);
 	$res = explode("&", $res);
 	
-	if($res[0]==$username && $res[0]==$password)
+	if($res[0]==UserName && $res[0]==PassWord)
 	{
 		session_start();
 		$_SESSION['status'] = 'auth';
@@ -42,7 +36,11 @@ if( $_POST && isset($_POST["out"]) ) {
 }
 
 if($_POST && isset($_POST["init"])) {
-
+	$init = array(
+		"sb" => ShowBanner,	//0 to hide banner, 1 to show
+		"dn" => DisplayName,	//display name
+		"em" => Email,	//Email
+		"st" => SubText,	//Subtext underneath email
+	);
 	echo json_encode($init);
 }
-//echo "I should be secret";

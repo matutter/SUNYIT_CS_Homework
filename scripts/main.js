@@ -2,7 +2,7 @@ function loadPage(s) {
 	//alert(s)
 	$.ajax({
 		type: "POST",
-		url: "scripts/main.php",
+		url: "scripts/fileReader.php",
 		data: {loadPage:s},
 		success: function(res) {
 			$('#files').prepend("<ul>")
