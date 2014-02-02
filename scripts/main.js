@@ -28,7 +28,7 @@ function initUser(l) {
 	$.ajax({
 	    type: "POST",
 	    dataType: "json",
-	    url: "/scripts/settings.php",
+	    url: "scripts/settings.php",
 	    data: {init:"start"},
 	    success: function(res){
 	    	$('.display-name').text(res.dn)
@@ -48,7 +48,7 @@ function initUser(l) {
 function tryToLogin() {
 	$.ajax({
 	    type: "POST",
-	    url: "/scripts/settings.php",
+	    url: "scripts/settings.php",
 	    data: {login:JSON.stringify($('form#login').serialize())},
 	    success: function(res){
 	    	if(res == 1) {
