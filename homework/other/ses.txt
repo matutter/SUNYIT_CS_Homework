@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+
+open(GRADES, "/etc/passwd") || die "Can't open grades: $!\n";
+while ($line = <GRADES>) {
+	print "$line \n";
+}
+

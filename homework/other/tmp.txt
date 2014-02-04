@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+
+open(GRADES, "grades") || die "Can't open grades: $!\n";
+while ($line = <GRADES>) {
+print "DEFAULT IS:" $_;
+    ($student, $grade) = split(/ /, $line);
+    chop $grade;
+print "STUDENT $student GRADE $grade \n";
+    $grades{$student} .= $grade . " ";
+}
+
+foreach $student (sort keys %grades) {
+    $scores = 0;
+    $total = 0;    
+    @grades = split(/ /, $grades{$student});
+print "GRADE ARRAY SIZE $#grades  \n";
+print "GRADE ARRAY $grades[0] $grades[1] \n";
+    foreach $grade (@grades) {
+        $total += $grade;
+        $scores++;
+    }
+    $average = $total / $scores;
+    print "$student: $grades{$student}\tAverage: $average\n";
+}

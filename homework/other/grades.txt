@@ -1,0 +1,6 @@
+scott 1
+joe 50
+scott 3
+joe 60
+scott 4
+scott 2

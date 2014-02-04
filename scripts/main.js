@@ -5,9 +5,10 @@ function loadPage(s) {
 		url: "scripts/fileReader.php",
 		data: {loadPage:s},
 		success: function(res) {
+			//alert(res)
 			$('#files').prepend("<ul>")
 			res = res.split(',')
-			if(res.length < 2) {
+			if(res.length < 1) {
 				$('#files').prepend("No files")
 				return;
 			}
@@ -89,7 +90,10 @@ $(document).ready(function(){
 		$('#title').html(fname)
 		$('.download').show()
 		$.get(link, function(s){
-			$('#code').text(s) //load as text not a file
+			if(link.match('.pl'))
+				$('#code').html(s)
+			else	
+				$('#code').text(s) //load as text not a file
 		})
 	})
 

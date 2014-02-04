@@ -2,7 +2,8 @@
 define('PUBLIC_PATH',dirname(realpath(__FILE__)) . "/");
 define('BASE_PATH',dirname(PUBLIC_PATH));
 define('HW_PATH',BASE_PATH . "//homework/");
-$res = "";
+$res= "";
+$i 	= 0;
 if($_POST && isset($_POST["loadPage"]))
 {
 	$log_directory = HW_PATH . $_POST["loadPage"];
@@ -10,9 +11,12 @@ if($_POST && isset($_POST["loadPage"]))
 		if ($handle = opendir($log_directory)) {
 			while(($file = readdir($handle)) !== FALSE)
 				if($file == "." || $file == ".." || $file == ".gitignore" || preg_match("/\.out/i",$file) ); else
-				$res .= $file.",";
+				//$res .= $file.",";
+			$res[$i++] = $file;
 			closedir($handle);
 		}
+		sort($res);
+		$res = implode(",",$res);
 		$res = rtrim($res,",");
 	    echo $res;
 	}

@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+open(GROUT, ">grades.out") || die "Can't open grades: $!\n";
+open(GRADES, "grades") || die "Can't open grades: $!\n";
+while ($line = <GRADES>) {
+    ($student, $grade) = split(/ /, $line);
+    chop $grade;
+print "STUDENT $student GRADE $grade \n";
+    $grades{$student} .= $grade . " ";
+}
+print GROUT "scott $grades{'scott'}\n";
+print GROUT "joe $grades{'joe'}\n";
+
+foreach $student (sort keys %grades) {
+    $scores = 0;
+    $total = 0;    
+    @grades = split(/ /, $grades{$student});
+print "GRADE ARRAY SIZE $#grades  \n";
+print "GRADE ARRAY $grades[0] $grades[1] \n";
+    foreach $grade (@grades) {
+        $total += $grade;
+        $scores++;
+    }
+    $average = $total / $scores;
+    print "$student: $grades{$student}\tAverage: $average\n";
+}
