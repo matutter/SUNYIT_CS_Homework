@@ -90,10 +90,14 @@ $(document).ready(function(){
 		$('#title').html(fname)
 		$('.download').show()
 		$.get(link, function(s){
-			if(link.match('.pl'))
+			if(link.match('.pl')) {
 				$('#code').html(s)
-			else	
+				$('.download').addClass('disabled')
+			}
+			else {
 				$('#code').text(s) //load as text not a file
+				$('.download').removeClass('disabled')
+			}
 		})
 	})
 
@@ -106,6 +110,10 @@ $(document).ready(function(){
 
 	$('.download').click(function(){
 		var pom = document.createElement('a')
+		/*if (fname.match('.pl')) { 
+			//alert("Cannot download server side scripts")
+			return
+		}*/ // to stop attempting to download things without URIDATA
 		pom.setAttribute('href', link)
 		pom.setAttribute('download', fname)
 		pom.click()
