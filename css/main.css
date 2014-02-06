@@ -180,3 +180,13 @@ td
 	margin-left: 0px!important;
 	height: 42px;
 }
+.code .page-header, .code h4, small.pull-right
+{
+	margin: 0px;
+	padding: 0px;
+}
+.code .page-header
+{
+	padding-bottom: 0px !important;
+	border-color: #333 !important;
+}
