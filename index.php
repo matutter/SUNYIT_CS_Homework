@@ -28,6 +28,12 @@ else
 <body>
 
 <a class="sr-only" href="#content">Skip to main content</a>
+
+<div id="no-js" style="width:100%; background-color:efefef; height:800px; position:fixed; top:52px;left:0px; z-index:999;" >
+<script>$('#no-js').hide();</script>
+Sorry! You need to run Javascript to view this page.
+</div>
+
 <header class="navbar navbar-static-top bs-docs-nav" role="banner">
 	<div class="container">
 		<div class="navbar-header">

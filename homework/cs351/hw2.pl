@@ -38,7 +38,9 @@ print '<div class="col-sm-12">';
 		$count = 0;
 		print "<strong>Putting things on the stack:</strong>\n";
 		for($count=0; $count<10;$count++)  {
-			@word = "Thing[$count] ";
+			@rgb = '"background-color:rgb(' . $count * 20 .','. $count * 20 .','. $count * 20 .');"';
+
+			@word = "<elBOX style=@rgb>[$count]</elBOX>";
 			print @word;
 			@stack = mpush( @stack, @word );
 		}
@@ -46,7 +48,7 @@ print '<div class="col-sm-12">';
 		print "\n\n<strong>Popping things off the stack:</strong>\n";
 
 		for($count=0; $count<10;$count++)  {
-			print mtop(@stack) . "\n";
+			print mtop(@stack);
 			@stack = mpop(@stack);
 		}
 
