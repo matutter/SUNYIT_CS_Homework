@@ -39,7 +39,7 @@ int main(int argc, char const *argv[])
 					else kill(pid, SIGUSR2);  //PART 1
 				exit(n);
 			}
-			exit(0x33);
+			exit(0xFFFF);
 			kill(getpid(), 9); //send kill if I become a zombie or cannot find file
 		}
 		else
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
 			wait(&status);
 			n = WEXITSTATUS(status);
 			if ( n != 0 && pid != 0) //no file too big && no parent
-				if(n==0x33)
+				if(n==0xFFFF) // probably wont be 65535
 					printf("\tChild cannot find [%s].\n", fname);
     		    else
 	    		    printf("\t%s is %d\n", fname, n);
@@ -66,7 +66,7 @@ static void handler(int signo) {
 	if(signo == SIGALRM)
 		printf("\tFile is too big!!!\n");
 	else
-		printf("\t%s is %s\n",fname, (signo%2)?"odd":"even");
+		printf("\t%s is %s\n",fname, (signo==10)?"odd":"even");
 	return;
 }
 
