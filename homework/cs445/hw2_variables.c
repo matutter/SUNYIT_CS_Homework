@@ -28,13 +28,9 @@ int main(int argc, char const *argv[])
 		if(pid == 0)
 		{
 			fp = fopen(fname, "r");
-			if(fp == NULL){
-				printf("\tChild cannot find [%s].", fname);
-				fclose(fp);
-			}
-			else {
+			if(fp != NULL){
 				stat(fname, &st);
-				fclose(fp);
++				fclose(fp);
 				n = st.st_size;
 				pid = getpid();
         		
@@ -43,7 +39,8 @@ int main(int argc, char const *argv[])
 					else kill(pid, SIGUSR2);  //PART 1
 				exit(n);
 			}
-			kill(getpid(), 9); //send kill if I become a zombie
+			exit(0x33);
+			kill(getpid(), 9); //send kill if I become a zombie or cannot find file
 		}
 		else
 		{	
@@ -55,7 +52,10 @@ int main(int argc, char const *argv[])
 			wait(&status);
 			n = WEXITSTATUS(status);
 			if ( n != 0 && pid != 0) //no file too big && no parent
-    		    printf("\t%s is %d\n", fname, n);
+				if(n==0x33)
+					printf("\tChild cannot find [%s].\n", fname);
+    		    else
+	    		    printf("\t%s is %d\n", fname, n);
 		}
 	}
 	printf("Bye bye\n\n");
