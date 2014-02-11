@@ -55,7 +55,7 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 			</script>';
 
 			print '<div class="col-sm-6 style="overflow:hidden;">';
-		    print "If you click submit I POST to myself.\nI show up on the side when posted to.\nThe times are when the requests are processed.";
+		    print "If you click submit I POST to myself.\nI show up on the side when posted to.\nRequests handled at timestamps.";
 		    print	'<form id="hw3form" role="form" style="white-space:normal;">
 			    		<div class="form-group">
 	    					<label for="input1">text input</label>
