@@ -33,8 +33,8 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
   					event.stopPropagation()
   					event.preventDefault()
 
-  					var res = $("#input1").val()+"::"+$("#input1").attr("name")+","
-
+  					var res = $("#hw3form").serialize()
+  					
 					if(posts > 5) { $("res1").empty().append("Stop making requests please..."); return; }
 					
 					$.ajax({
@@ -57,12 +57,56 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 			print '<div class="col-sm-6 style="overflow:hidden;">';
 		    print "If you click submit I POST to myself.\nI show up on the side when posted to.\nRequests handled at timestamps.";
 		    print	'<form id="hw3form" role="form" style="white-space:normal;">
-			    		<div class="form-group">
-	    					<label for="input1">text input</label>
-	            			<input value="default" name="textbox!" type="text" id="input1" class="form-control">
-		            		<button id="hw3btn" class="btn btn-default">Submit</button>
-	            		<res1></res1></div>
-            		</form>';
+		    		<div class="form-group">
+		    			<table class="table table-condensed">
+		    				<tbody>
+				    		<th><label for="input1">Information</label></th>
+				    		<tr>
+				    			<td><strong>Name</strong></td>
+				    			<td>
+				    				<input value="mat" name="fname" type="text" id="fname" class="form-control">
+	            					<input value="utter" name="fname" type="text" id="lname" class="form-control">
+	            				</td>
+			    			</tr>
+			    			<tr>
+			    				<td>
+			    					<strong>Species</strong>
+			    				</td>
+			    				<td>
+									<input type="radio" name="type" value="human" checked>Human 
+					            	<input type="radio" name="type" value="alien">Alien
+			    				</td>
+			    			</tr>
+			    			<tr>
+				    			<td>
+				    				<strong>Status</strong>
+				    			</td>
+				    			<td>
+				    				<input type="checkbox" name="health" value="alive">Alive
+									<input type="checkbox" name="health" value="dead">Dead 
+								    <input type="checkbox" name="health" value="alive&dead" checked>Other
+				    			</td>
+			    			</tr>
+			    			<tr>
+			    				<td>
+			    					<strong>Comment</strong>
+			    				</td>	
+			    				<td>
+				    				<textarea name="comment" class="form-control" rows="4" cols="50">I love text areas SOOO much!</textarea>
+			    				</td>
+			    			<tr>
+			    			<tr>
+			    				<td>
+			            		<button id="hw3btn" class="btn btn-default">Submit</button>
+			    				</td>
+			    				<td>
+				            		<res1></res1>			    					
+			    				</td>
+			    			</tr>
+	    					</tbody>
+	    					</table>
+
+            		</div></form>';
      		print '</div>';
 			print '</div>';
 		} 
