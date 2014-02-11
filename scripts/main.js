@@ -90,7 +90,7 @@ $(document).ready(function(){
 		$('#title').html(fname)
 		$('.download').show()
 		$.get(link, function(s){
-			if(link.match('.pl')) {
+			if(link.match('.pl|.cgi')) {
 				$('#code').html(s)
 				$('.download').addClass('disabled')
 			}

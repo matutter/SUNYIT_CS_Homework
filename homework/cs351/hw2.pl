@@ -35,12 +35,18 @@ print '<div class="col-sm-12">';
 	print '<div style="white-space:pre">';
 		print '<div class="page-header"> <h4>Hw2 Mat Utter <small class="pull-right">'.localtime.'</small> </h4> </div>';
 
-		$count = 0;
-		print "<strong>Putting things on the stack:</strong>\n";
+		my @line = "";
+		open (MYFILE, 'text.file');
+		while (<MYFILE>) { chomp; @line = $_ }
+		close (MYFILE); 
+
+		my @words = split /\s+/,@line[0];
+		
+		print "<strong>Read from 'text.file'\nPutting things on the stack:</strong>\n";
 		for($count=0; $count<10;$count++)  {
 			@rgb = '"background-color:rgb(' . $count * 20 .','. $count * 20 .','. $count * 20 .');"';
 
-			@word = "<elBOX style=@rgb>[$count]</elBOX>";
+			@word = "<elBOX style=@rgb> ".@words[$count]."</elBOX>";
 			print @word;
 			@stack = mpush( @stack, @word );
 		}
