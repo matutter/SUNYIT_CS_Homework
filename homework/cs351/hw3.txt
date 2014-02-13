@@ -27,13 +27,10 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 		   	print "You said that your\n";
 		   	foreach(@chunks){
 		   		my @part = split /\=/, $_ ;
-		   		if(defined($bits{$part[0]})) {
-		   			$bits{$part[0]}	.= " ";
-		   		}
-		   		$bits{$part[0]} .= $part[1];		   		
+		   		$bits{$part[0]} .= $part[1] . ", ";
 		   	}
 		   	if(defined($bits{"health"}) ) {
-		   		if($bits{"health"} eq "alive dead") {
+		   		if($bits{"health"} eq "alivedead") {
 	   				$bits{"health"} = "Zombie!!!";	
 		   		}
 		   	}
@@ -57,7 +54,7 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
   					event.preventDefault()
 
   					var res = $("#hw3form").serialize()
-  					if(	$(document.activeElement).val() == "translate")
+  					if(	$(document.activeElement).attr("id") == "translate")
   						res = res.split("").reverse().join("")
 					if(posts > 5) { $("res1").empty().append("Stop making requests please..."); return; }
 					
@@ -69,8 +66,7 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 						success: function(res) {
 							$("res1,res2").empty()
 							$("res2").append(res)
-							++posts
-							//$("res1").append("<strong>I MADE that POST ["+(++posts)+"]\n</strong>");
+							$("res1").append("<strong>I MADE that POST ["+(++posts)+"]\n</strong>");
 						}
 
 					})
@@ -152,8 +148,8 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 			    			<tr>
 			    			<tr>
 			    				<td>
-			    				<button id="translate" class="btn btn-default" value="translate">Alien Submit</button>
-			            		<button id="hw3btn" class="btn btn-default" value="submit">Normal Submit</button>
+			    				<button id="translate" class="btn btn-default">Alien Submit</button>
+			            		<button id="hw3btn" class="btn btn-default">Normal Submit</button>
 			    				</td>
 			    				<td>
 				            		<res1></res1>			    					
