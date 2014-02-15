@@ -59,6 +59,11 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
   					var res = $("#hw3form").serialize()
   					if(	$(document.activeElement).val() == "translate")
   						res = res.split("").reverse().join("")
+					else if( $(document.activeElement).val() == "clear") {
+						$("input,select,textarea").val("").prop("checked", false)
+						return
+					}
+					
 					if(posts > 5) { $("res1").empty().append("Stop making requests please..."); return; }
 					
 					$.ajax({
@@ -152,11 +157,12 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 			    			<tr>
 			    			<tr>
 			    				<td>
-			    				<button id="translate" class="btn btn-default" value="translate">Alien Submit</button>
-			            		<button id="hw3btn" class="btn btn-default" value="submit">Normal Submit</button>
+			    				<button id="translate" class="btn btn-default" name="submit" value="translate">Alien Submit</button>
+			            		<button id="hw3btn" class="btn btn-default" name="submit" value="normal">Normal Submit</button>
+			            		<button class="btn btn-danger" name="clear" value="clear">Clear Form</button>
 			    				</td>
 			    				<td>
-				            		<res1></res1>			    					
+				            		<res1 class="container"></res1>			    					
 			    				</td>
 			    			</tr>
 	    					</tbody>
