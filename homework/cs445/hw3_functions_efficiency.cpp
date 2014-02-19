@@ -1,74 +1,92 @@
-// hw2 (officially hw3)
-// can be used with big.txt, file.txt, and textfile
-// the filenames will be hardcoded 
+// Copy a file
+#include <fstream>      // std::ifstream, std::ofstream
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <iostream>
-#include <fstream>
-#include "profile.h"
-//fread/read, fwrite/write, fopen/open, fclose/close
-#define sm_buf 1024
-#define lg_buf 4096
+#define PRSET1__  t1 = CPUCycleCounter();
+#define PRSET2__  t2 = CPUCycleCounter();
 
 using namespace std;
-int main(int argc, char const *argv[])
+
+static inline unsigned long long CPUCycleCounter(void) {
+  unsigned long long int x;
+  __asm__ volatile (".byte 0x0F, 0x31" : "=A" (x));
+  return x;
+}
+
+int main () {
+  int i;
+  ifstream inf;
+  ofstream ouf;
+  filebuf * buff_stream;
+  unsigned long long int t1, t2; //start time end time 
+  string text[2] = {"large","small"};
+  char* buffer;
+  long size;
+  char * buf;
+  FILE * fp;
+
+cout << endl << "Operation\tCylces" << endl;
+for(i=1;i<3;i++)
 {
-	char fname[255] = "textfile";
-	operation profile[4];
-	
-	init(profile, fname);	//already had this written
-	do_fwrite	(profile,1);
-	do_fopen	(profile,0);
-	do_fread	(profile,2);
-	do_fclose	(profile,3);
+  cout << "*Using a " << text[i-1] << " buffer" << endl;
 
+  buff_stream = inf.rdbuf(); //gets the stream buffer
+  PRSET1__
+  buff_stream->open("textfile",std::ios::in); //opens textfile as input
+  PRSET2__
+  cout << "open\t\t" << t2-t1 << endl;
 
-	cout << endl << "frwite/write buffer size " << BUFSIZ << endl;
-	cout << "op \t\t cycles" << endl;
-	cout << profile[1].op << "" << profile[1].cycles << endl;
-	cout << profile[0].op << "" << profile[0].cycles << endl;
-	cout << profile[2].op << "" << profile[2].cycles << endl;
-	cout << profile[3].op << "" << profile[3].cycles << endl << endl;
+  inf.seekg (0,inf.end);
+  size = inf.tellg();
+  inf.seekg (0);
+  buffer = new char[size/i]; //gets the size and allocates an exact (or 1/2) buffer
 
-	ifstream inf	(fname,ifstream::in);
-	ofstream ouf (fname,ofstream::out);
-	const char s[BUFSIZ] = "This is a random text file used as\nan example\n\nof a file\nfor \n\nprograms to\n\n\n";
-	char buf[BUFSIZ];
+  PRSET1__
+  inf.read (buffer,size); // reads the file into the buffer
+  PRSET2__
+  cout << "read\t\t" << t2-t1 << endl;
+  PRSET1__
+  buff_stream->close(); // close the file for input
+  PRSET2__
+  cout << "close\t\t" << t2-t1 << endl;
+  buff_stream = ouf.rdbuf(); // get an outfile stream
+  buff_stream->open("textfile2",std::ios::out); //open it for output
 
-	inf.open(fname,ios_base::in);
-	t1 = upCycle();
-	ouf.write(s,sizeof(s));
-	t2 = upCycle();
-	cout << "write\t\t" << t2-t1 << endl;
-	ouf.close();
+  PRSET1__
+  ouf.write (buffer,size); //write it out with an exact (or 1/2) buffer
+  PRSET2__
+  cout << "write\t\t" << t2-t1 << endl;
+  buff_stream->close();
+  cout << endl;
 
-	t1 = upCycle();
-	inf.open(fname,ios_base::in);
-	t2 = upCycle();
-	inf.close();
-	cout << "open\t\t" << t2-t1 << endl;
+}
 
-	inf.open(fname,ios_base::in);
-	t1 = upCycle();
-	inf.read(buf,ios_base::in);
-	t2 = upCycle();
-	inf.close();
-	cout << "read\t\t" << t2-t1 << endl;
+  cout << "*Using a " << text[i-3] << " buffer" << endl;
+  // C style file operations
+  buf = (char*) malloc(size);
+  PRSET1__
+  fp = fopen("textfile","r");
+  PRSET2__
+  cout << "fopen\t\t" << t2-t1 << endl;
+  PRSET1__
+  fread(buf, sizeof(char), size, fp);
+  PRSET2__
+  cout << "fread\t\t" << t2-t1 << endl;
+  PRSET1__
+  fclose(fp);
+  PRSET2__
+  cout << "fclose\t\t" << t2-t1 << endl;
+  fp = fopen("textfile2","w");
+  PRSET1__
+  fwrite(buf, sizeof(char), size, fp);
+  PRSET2__
+  cout << "fwrite\t\t" << t2-t1 << endl;
+  fclose(fp);
+  free(buf);
 
-	inf.open(fname,ios_base::in);
-	t1 = upCycle();
-	inf.close();
-	t2 = upCycle();
-	cout << "close\t\t" << t2-t1 << endl;
+  cout << endl;
 
-
-
-	const char s2[sm_buf] = "This is a random text file used as\nan example\n\nof a file\nfor \n\nprograms to\n\n\n";
-	t1 = upCycle();
-	ouf.write(s,sizeof(s));
-	t2 = upCycle();
-	cout << endl << "write\t\t" << t2-t1 << "\tsmaller buffer of " << sm_buf << endl << endl;
-	ouf.close();
-	return 0;
+  //delete[] buffer;
+  return 0;
 }
