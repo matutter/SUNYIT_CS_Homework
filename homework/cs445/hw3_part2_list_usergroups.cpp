@@ -44,13 +44,11 @@ else
 		s.erase(0,n+1);				//get erase that line in buffer
 		args.push_back( sub.substr(0,sub.find(":")) );	//get first part in sub
     }
-
+    
     for(vector<string>::iterator it = args.begin(); it != args.end(); ++it)
 		arg_vec.push_back(&(*it)[0]);
 
 	execvp("groups", arg_vec.data());
-
 }
-
 return 0;
 }
