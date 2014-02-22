@@ -64,7 +64,7 @@ start_page();
 					my $text = $field . " is " . $input[0] ."<br>";
 					
 					if($field eq "submit") { }
-					print $test;
+					print $text;
 
 				}
 
