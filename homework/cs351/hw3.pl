@@ -11,37 +11,65 @@ my $c = CGI->new;
 my @origins = ('United States','Utica','Planet','Space');
 my @powers = ('flying','laser eyes','bullet proof','ice breath','fire breath','hammer');
 
-print "Content-type: text/html\n\n";
-print '<div class="col-sm-12 style="overflow:hidden;">';
-	print '<div style="white-space:pre">';
-		print '<div class="page-header"> <h4>Hw3 Mat Utter <small class="pull-right">'.localtime.'</small> </h4> </div>';
+start_page();
 
+		if ($c->param()) {
+			if($c->param('data')) #handle JS ajax data
+			{
+				my $res = $c->param('data');
+				$res=~ s/\+/ /g;
+				$res=~ s/\%5B\%5D|D5%B5%//g;
+			   	my @chunks = split /\&/, $res;
 
-		if ('POST' eq $c->request_method && $c->param('data')) {
-			my $res = $c->param('data');
-			$res=~ s/\+/ /g;
-			$res=~ s/\%5B\%5D|D5%B5%//g;
-		   	my @chunks = split /\&/, $res;
+			   	my %bits;
+			   	print "You said that your\n";
+			   	foreach(@chunks){
+			   		my @part = split /\=/, $_ ;
+			   		if(defined($bits{$part[0]})) {
+			   			$bits{$part[0]}	.= " ";
+			   		}
+			   		$bits{$part[0]} .= $part[1];		   		
+			   	}
+			   	if(defined($bits{"health"}) ) {
+			   		if($bits{"health"} eq "alive dead") {
+		   				$bits{"health"} = "Zombie!!!";	
+			   		}
+			   	}
+			   	print "$_ is $bits{$_}\n" for (keys %bits);
+			}
+			else #handle regular POST data
+			{
+				print "You said that your\n";
+				my @fields = $c->param();
 
-		   	my %bits;
-		   	print "You said that your\n";
-		   	foreach(@chunks){
-		   		my @part = split /\=/, $_ ;
-		   		if(defined($bits{$part[0]})) {
-		   			$bits{$part[0]}	.= " ";
-		   		}
-		   		$bits{$part[0]} .= $part[1];		   		
-		   	}
-		   	if(defined($bits{"health"}) ) {
-		   		if($bits{"health"} eq "alive dead") {
-	   				$bits{"health"} = "Zombie!!!";	
-		   		}
-		   	}
-		   	#print in no particular order		   	
-		   	print "$_ is $bits{$_}\n" for (keys %bits);
+				foreach(@fields)
+				{
+					my $field = $_;
+					my @input = $c->param($_);
+					
+					if($field eq "health[]") {
+						@input = $c->param($_);
+						if(@input eq 2) {
+							$input[0] = "Zombie!!!";
+						}
+						$field = "health";
+					}
+					elsif($field eq "power") {
+						foreach(@input) {
+							if($_ ne $input[0]) {
+								$input[0] .= " and " . $_;
+							} 
+						}
+					}
+					my $text = $field . " is " . $input[0] ."<br>";
+					
+					if($field eq "submit") { }
+					print $test;
 
-		   	#print with natural sort
-		   	##not written yet
+				}
+
+				
+			}
 
 		   	print "</div></div>";
 		   	return;
@@ -94,7 +122,7 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 				    		<tr>
 				    			<td><strong>Name</strong></td>
 				    			<td>
-				    				<input value="mat" name="Fistname" type="text" id="fname" class="form-control">
+				    				<input value="mat" name="FirstName" type="text" id="fname" class="form-control">
 	            					<input value="utter" name="LastName" type="text" id="lname" class="form-control">
 	            				</td>
 			    			</tr>
@@ -172,4 +200,15 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
      		print '</div>';
 			print '</div>';
 		} 
-print '<div class="col-sm-6"><res2></res2><div>';
+end_page();
+
+sub end_page {
+	print '<div class="col-sm-6"><res2></res2><div>';
+}
+
+sub start_page {
+	print "Content-type: text/html\n\n";
+	print '<div class="col-sm-12 style="overflow:hidden;">';
+		print '<div style="white-space:pre">';
+			print '<div class="page-header"> <h4>Hw3 Mat Utter <small class="pull-right">'.localtime.'</small> </h4> </div>';
+}
