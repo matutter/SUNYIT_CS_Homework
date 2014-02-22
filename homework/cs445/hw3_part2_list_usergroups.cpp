@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 
 if(pid == 0)
 {
-	dup2 (link[1], STDOUT_FILENO); //duplciate file descritor for child to write to
+	dup2 (link[1], STDOUT_FILENO);	//duplciate file descritor for child to write to
 	close(link[0]);
 	execl("/bin/cat", "cat", "/etc/passwd", (char *)0);	
 }
@@ -36,6 +36,9 @@ else
 	close(link[1]);
     read(link[0], buffer, sizeof(buffer));
 	s = buffer;
+
+	while(s[0]=='#')				//get rid of dognet crap
+		s.erase(0,s.find("\n")+1);
 
 	while(!s.empty())
 	{
