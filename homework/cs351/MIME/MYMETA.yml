@@ -1,0 +1,25 @@
+---
+abstract: 'Definition of MIME types'
+author:
+  - 'Mark Overmeer'
+build_requires:
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+distribution_type: module
+dynamic_config: 0
+generated_by: 'ExtUtils::MakeMaker version 6.57_05'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: MIME-Types
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  File::Basename: 0
+  File::Spec: 0
+  Test::More: 0.47
+version: 2.04
