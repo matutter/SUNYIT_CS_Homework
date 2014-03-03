@@ -41,6 +41,7 @@ start_page();
 			{
 				print "You said that your\n";
 				my @fields = $c->param();
+				my $translate = $c->param("submit");
 
 				foreach(@fields)
 				{
@@ -61,10 +62,15 @@ start_page();
 							} 
 						}
 					}
-					my $text = $field . " is " . $input[0] ."<br>";
+					my $text = $field . " is " . $input[0];
 					
-					if($field eq "submit") { }
-					print $text;
+
+					if($translate eq "translate") { $text = scalar reverse $text; }
+					
+					if($field eq "submit")
+					{ }
+					else
+					{ print $text . "<br>"; }
 
 				}
 

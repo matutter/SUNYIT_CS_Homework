@@ -11,34 +11,71 @@ my $c = CGI->new;
 my @origins = ('United States','Utica','Planet','Space');
 my @powers = ('flying','laser eyes','bullet proof','ice breath','fire breath','hammer');
 
-print "Content-type: text/html\n\n";
-print '<div class="col-sm-12 style="overflow:hidden;">';
-	print '<div style="white-space:pre">';
-		print '<div class="page-header"> <h4>Hw3 Mat Utter <small class="pull-right">'.localtime.'</small> </h4> </div>';
+start_page();
 
+		if ($c->param()) {
+			if($c->param('data')) #handle JS ajax data
+			{
+				my $res = $c->param('data');
+				$res=~ s/\+/ /g;
+				$res=~ s/\%5B\%5D|D5%B5%//g;
+			   	my @chunks = split /\&/, $res;
 
-		if ('POST' eq $c->request_method && $c->param('data')) {
-			my $res = $c->param('data');
-			$res=~ s/\+/ /g;
-			$res=~ s/\%5B\%5D|D5%B5%//g;
-		   	my @chunks = split /\&/, $res;
+			   	my %bits;
+			   	print "You said that your\n";
+			   	foreach(@chunks){
+			   		my @part = split /\=/, $_ ;
+			   		if(defined($bits{$part[0]})) {
+			   			$bits{$part[0]}	.= " ";
+			   		}
+			   		$bits{$part[0]} .= $part[1];		   		
+			   	}
+			   	if(defined($bits{"health"}) ) {
+			   		if($bits{"health"} eq "alive dead") {
+		   				$bits{"health"} = "Zombie!!!";	
+			   		}
+			   	}
+			   	print "$_ is $bits{$_}\n" for (keys %bits);
+			}
+			else #handle regular POST data
+			{
+				print "You said that your\n";
+				my @fields = $c->param();
+				my $translate = $c->param("submit");
 
-		   	my %bits;
-		   	print "You said that your\n";
-		   	foreach(@chunks){
-		   		my @part = split /\=/, $_ ;
-		   		$bits{$part[0]} .= $part[1] . ", ";
-		   	}
-		   	if(defined($bits{"health"}) ) {
-		   		if($bits{"health"} eq "alivedead") {
-	   				$bits{"health"} = "Zombie!!!";	
-		   		}
-		   	}
-		   	#print in no particular order		   	
-		   	print "$_ is $bits{$_}\n" for (keys %bits);
+				foreach(@fields)
+				{
+					my $field = $_;
+					my @input = $c->param($_);
+					
+					if($field eq "health[]") {
+						@input = $c->param($_);
+						if(@input eq 2) {
+							$input[0] = "Zombie!!!";
+						}
+						$field = "health";
+					}
+					elsif($field eq "power") {
+						foreach(@input) {
+							if($_ ne $input[0]) {
+								$input[0] .= " and " . $_;
+							} 
+						}
+					}
+					my $text = $field . " is " . $input[0];
+					
 
-		   	#print with natural sort
-		   	##not written yet
+					if($translate eq "translate") { $text = scalar reverse $text; }
+					
+					if($field eq "submit")
+					{ }
+					else
+					{ print $text . "<br>"; }
+
+				}
+
+				
+			}
 
 		   	print "</div></div>";
 		   	return;
@@ -54,8 +91,13 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
   					event.preventDefault()
 
   					var res = $("#hw3form").serialize()
-  					if(	$(document.activeElement).attr("id") == "translate")
+  					if(	$(document.activeElement).val() == "translate")
   						res = res.split("").reverse().join("")
+					else if( $(document.activeElement).val() == "clear") {
+						$("input,select,textarea").val("").prop("checked", false)
+						return
+					}
+					
 					if(posts > 5) { $("res1").empty().append("Stop making requests please..."); return; }
 					
 					$.ajax({
@@ -66,7 +108,8 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 						success: function(res) {
 							$("res1,res2").empty()
 							$("res2").append(res)
-							$("res1").append("<strong>I MADE that POST ["+(++posts)+"]\n</strong>");
+							++posts
+							//$("res1").append("<strong>I MADE that POST ["+(++posts)+"]\n</strong>");
 						}
 
 					})
@@ -85,7 +128,7 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 				    		<tr>
 				    			<td><strong>Name</strong></td>
 				    			<td>
-				    				<input value="mat" name="Fistname" type="text" id="fname" class="form-control">
+				    				<input value="mat" name="FirstName" type="text" id="fname" class="form-control">
 	            					<input value="utter" name="LastName" type="text" id="lname" class="form-control">
 	            				</td>
 			    			</tr>
@@ -148,11 +191,12 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
 			    			<tr>
 			    			<tr>
 			    				<td>
-			    				<button id="translate" class="btn btn-default">Alien Submit</button>
-			            		<button id="hw3btn" class="btn btn-default">Normal Submit</button>
+			    				<button id="translate" class="btn btn-default" name="submit" value="translate">Alien Submit</button>
+			            		<button id="hw3btn" class="btn btn-default" name="submit" value="normal">Normal Submit</button>
+			            		<button class="btn btn-danger" name="clear" value="clear">Clear Form</button>
 			    				</td>
 			    				<td>
-				            		<res1></res1>			    					
+				            		<res1 class="container"></res1>			    					
 			    				</td>
 			    			</tr>
 	    					</tbody>
@@ -162,4 +206,15 @@ print '<div class="col-sm-12 style="overflow:hidden;">';
      		print '</div>';
 			print '</div>';
 		} 
-print '<div class="col-sm-6"><res2></res2><div>';
+end_page();
+
+sub end_page {
+	print '<div class="col-sm-6"><res2></res2><div>';
+}
+
+sub start_page {
+	print "Content-type: text/html\n\n";
+	print '<div class="col-sm-12 style="overflow:hidden;">';
+		print '<div style="white-space:pre">';
+			print '<div class="page-header"> <h4>Hw3 Mat Utter <small class="pull-right">'.localtime.'</small> </h4> </div>';
+}

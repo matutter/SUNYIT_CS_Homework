@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
 			fp = fopen(fname, "r");
 			if(fp != NULL){
 				stat(fname, &st);
-+				fclose(fp);
+				fclose(fp);
 				n = st.st_size;
 				pid = getpid();
         		

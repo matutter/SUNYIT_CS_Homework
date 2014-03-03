@@ -104,7 +104,7 @@ Sorry! You need to run Javascript to view this page.
 
 	<div class="container">
 		<div id="files" class="col-sm-3 files"></div>
-		<div id="code" class="col-sm-9 code"></div>
+		<div id="code" class="col-sm-9 code" style="white-space:pre; tab-size:4;"></div>
 	</div>
 </div>
 
