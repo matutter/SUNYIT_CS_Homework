@@ -51,29 +51,61 @@ private:
 		/* other things to sync go here */
 
 		//cout << "sync complete" << endl;
-
 	}
 	void childLoop() {
 		if(isParent()) return;
 		unsigned int childNo = whichChild(getpid());
 		//cout << children[childNo].childPid << "["<< childNo << "] test: " ;
-        kill(children[childNo].childPid,SIGTSTP); //wait for sync from parent
+        kill(children[childNo].childPid,SIGTSTP); //wait to sync from parent
        	childSync(childNo);
-        kill(children[childNo].childPid,SIGTSTP); //begin child main loop
+        kill(children[childNo].childPid,SIGTSTP); // wait to begin child main loop
 
+        char * file = new char[children[childNo].cmdFile.size() + 1];
+		copy(children[childNo].cmdFile.begin(), children[childNo].cmdFile.end(), file);
+		file[children[childNo].cmdFile.size()] = '\0';
         while(1)
-        {
-        	cout << children[childNo].childPid << " wants to read " << children[childNo].cmdFile << endl;
-        	sleep(1);
+        {    	
+			ifstream inf(file);
+			string cmd, buffer="";
+			int i=0;
+
+			
+			while(inf.is_open() && !inf.eof()) {
+				getline (inf,cmd);
+				if(!inf.eof())
+					buffer += cmd + "\n";
+				i++;
+			}
+			inf.close();
+
+			if(i==1) buffer = "\n  ";
+
+			if(buffer.size())
+			{
+				ofstream ouf(file);
+				ouf << buffer.erase(buffer.size()-1) << flush;
+				ouf.close();
+			}
+        	
+
+			char * executable = new char[cmd.size() + 1];
+			copy(cmd.begin(), cmd.end(), executable);
+			executable[cmd.size()] = '\0';
+
+			cout << "  test " << executable << flush;
+			pid_t exec_pid = fork();
+			if(exec_pid == 0)	execlp("cat", "cat", executable, NULL);
+
+
+        	kill(children[childNo].childPid,SIGTSTP);
         }
-        //kill(children[childNo].childPid,SIGTERM);
+        
 	}
 	string readPipe(int *pipes)
 	{
 		int i;
 		close(pipes[1]);
 		char buf[1024];
-		string buffer = "cmd.file";
 		read(pipes[0], &buf, 1024);
 		for(i=0;i<1024;i++) if(buf[i]==0) { buf[i-1] = 0; break; }
 		return buf;

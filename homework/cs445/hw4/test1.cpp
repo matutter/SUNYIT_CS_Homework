@@ -28,19 +28,14 @@ int  main(void)
 		cm.cmdFile().set(cmdFile).sync();
 		//cm.report();
 
-
 		cout << (fl.addListener(cmdFile)?"Listener added for ":"Failed to add listener for ") << fl.file.name << endl;
 		sleep(1); //avoiding the need for synchronisity
 		while(fl.listenModify())
 		{
-			if(cm.good()) cout << "children are healthy" << endl;
-			cout << "file change detected " << endl;
+			//cout << "file change detected " << endl;
+			if(cm.good()); //check if children exist
 			cm.wakeUpAllCall();
-
-
-
-
-			if(!cm.good()) { cout << "children are abnormal" << endl;break; } 
+			if(!cm.good()) { cout << endl << "children are abnormal" << endl; break; } 
 		}
 		cm.endChildren();
 
