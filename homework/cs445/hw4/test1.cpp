@@ -1,4 +1,5 @@
 /* Using 'wait();' and an '__EXIT_STATUS' makes sure we don't have zombies or a race condition */ 
+#include	<unistd.h>
 #include	<sys/types.h>
 #include	<sys/wait.h>
 #include	<sys/stat.h>
@@ -16,11 +17,13 @@ int  main(void)
 	string	cmdFile;
 
 	fileListener fl;
-	childManager cm(2,getpid());
+	cout << endl << "number of children : ";
+	cin >> n;
+	childManager cm(n,getpid());
 
 	if(cm.isParent()) { 
 
-		cout << endl << "Enter name of command file: ";
+		cout << "Enter name of command file: ";
 		cin  >> cmdFile;
 		cm.cmdFile().set(cmdFile).sync();
 		//cm.report();
@@ -30,9 +33,16 @@ int  main(void)
 		sleep(1); //avoiding the need for synchronisity
 		while(fl.listenModify())
 		{
+			if(cm.good()) cout << "children are healthy" << endl;
 			cout << "file change detected " << endl;
 			cm.wakeUpAllCall();
+
+
+
+
+			if(!cm.good()) { cout << "children are abnormal" << endl;break; } 
 		}
+		cm.endChildren();
 
 	}
 	cm.report();

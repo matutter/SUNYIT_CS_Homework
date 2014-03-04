@@ -2,10 +2,14 @@
 // let me know if you use or adapt it matutter4@gmail.com
 #include	<iostream>
 #include	<fstream>
+#include	<sys/wait.h>
+#include	<sys/stat.h>
 #include	<sys/types.h>
 #include 	<signal.h>
 #include	<cstdlib>
 #include	<vector>
+#include	<unistd.h>
+#include	<string>
 
 #define		_IDLE	0
 #define		_BUSY	1
@@ -39,48 +43,40 @@ private:
 			childPid = getpid();
 		}
 	};
-	/* GETTING STUCK ON PIPE READ??? */
+
 	void childSync(unsigned int childNo) {
-		cout << "attempting to sync " << childNo << endl;
+		//cout << "attempting to sync " << childNo << endl;
 		if(isParent()) return;
-   		//cout << "child " << childNo << "  ";
-   		//cout << children[childNo].pipe_ends[1] << " ";
-   		//cout << children[childNo].pipe_ends[0] << endl;
-
 		children[childNo].cmdFile = readPipe(children[childNo].pipe_ends);
+		/* other things to sync go here */
 
-		//cout << "sync  " << children[childNo].childPid << endl;
-		//cout << children[childNo].cmdFile << endl;
-		cout << "sync complete" << endl;
-		//child should be 'status T' at this point
+		//cout << "sync complete" << endl;
+
 	}
 	void childLoop() {
 		if(isParent()) return;
 		unsigned int childNo = whichChild(getpid());
-		cout << children[childNo].childPid << "["<< childNo << "] test: " ;
+		//cout << children[childNo].childPid << "["<< childNo << "] test: " ;
         kill(children[childNo].childPid,SIGTSTP); //wait for sync from parent
        	childSync(childNo);
-        kill(children[childNo].childPid,SIGTSTP); //begin main loop
+        kill(children[childNo].childPid,SIGTSTP); //begin child main loop
 
         while(1)
         {
-        	cout << children[childNo].cmdFile << endl;
-			kill(children[childNo].childPid,SIGTSTP); 
+        	cout << children[childNo].childPid << " wants to read " << children[childNo].cmdFile << endl;
+        	sleep(1);
         }
+        //kill(children[childNo].childPid,SIGTERM);
 	}
 	string readPipe(int *pipes)
 	{
-		string temp="";
-		cout << getpid() << " pipes " << pipes[0] << " " << pipes[1] << " read " ;
+		int i;
 		close(pipes[1]);
-		FILE *stream;
-		int c;
-		stream = fdopen (pipes[0], "r");
-		while ((c = fgetc (stream)) != EOF)
-			{ temp += c; cout << (char)c;}
-		cout << endl;
-		fclose (stream);
-		return temp;
+		char buf[1024];
+		string buffer = "cmd.file";
+		read(pipes[0], &buf, 1024);
+		for(i=0;i<1024;i++) if(buf[i]==0) { buf[i-1] = 0; break; }
+		return buf;
 	}
 	void writePipe(int *pipes, string mes)
 	{
@@ -140,6 +136,18 @@ public:
 			i++;
 		}
 		return 9999;
+	}
+	void endChildren() {
+		for(child ea : children)	
+			kill(ea.pid,9);
+	}
+	bool good() {
+		pid_t res;
+		int status;
+		for(child ea : children)
+			if( waitpid(ea.pid, &status, WNOHANG) )
+				return 0;
+		return 1;
 	}
 	childManager &cmdFile() { this->setter_index = _cmdFile; return *this; } // set the setter return the class instance
 	bool isParent(void) { return (parent == getpid())?1:0; } // 1 if parent else 0
