@@ -5,6 +5,7 @@
 #include	<sys/stat.h>
 #include 	<iostream>
 #include	<cstring>
+#include	<vector>
 #include	"fileListener.h"
 #include	"childManager.h"
 
@@ -12,35 +13,41 @@ using namespace std;
 
 int  main(void)
 {
-	int		n = 0;
+	int		n = 2;
 	pid_t	pid = 1;
 	string	cmdFile;
-
-	fileListener fl;
-	cout << endl << "number of children : ";
-	cin >> n;
-	childManager cm(n,getpid());
-
-	if(cm.isParent()) { 
+	vector<childManager> cm;
 
 		cout << "Enter name of command file: ";
-		cin  >> cmdFile;
-		cm.cmdFile().set(cmdFile).sync();
-		//cm.report();
+		//cin  >> cmdFile;
+		cmdFile = "cmd.file";
 
+
+		fileListener fl;
 		cout << (fl.addListener(cmdFile)?"Listener added for ":"Failed to add listener for ") << fl.file.name << endl;
-		sleep(1); //avoiding the need for synchronisity
+		sleep(1);
+
+		for(;n;n--)
+			cm.push_back( childManager(getpid(),cmdFile) );
+
+
 		while(fl.listenModify())
 		{
-			//cout << "file change detected " << endl;
-			if(cm.good()); //check if children exist
-			cm.wakeUpAllCall();
-			if(!cm.good()) { cout << endl << "children are abnormal" << endl; break; } 
+			cout << "changes detected " << endl;
+			while(!fl.empty()) {
+				sleep(1);
+				for(childManager ea : cm) {
+					if(ea.good()) {
+						ea.wakeup();
+						cout << "waking up" << endl;
+					}
+				}				
+			}
 		}
-		cm.endChildren();
+		//cm.endChildren();
 
-	}
-	cm.report();
+	//}
+	//cm.report();
 
 	return 0;
 }

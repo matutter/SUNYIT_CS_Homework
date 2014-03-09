@@ -10,6 +10,7 @@
 #include	<vector>
 #include	<unistd.h>
 #include	<string>
+#include	"alert.h"
 
 #define		_IDLE	0
 #define		_BUSY	1
@@ -24,165 +25,79 @@ using namespace std;
 class childManager
 {
 private:
-	unsigned int setter_index;
 	class child {
 	public:
 		unsigned int No;
 		bool	status;
-		pid_t	pid;
-		int 	childPid;
+		pid_t	pid, parentPid;
 		int 	pipe_ends[2];
-		string	cmdFile;
-
-		child(unsigned int n, bool s) {
+		char *	cmdFile;
+		void initChild(unsigned int n, bool s, string file, int parent) {
 			No = n; status = s;
 			if(pipe(pipe_ends)) {
 				cout<<"pipe for child " << pid << " failed" << endl;
 			}
-			pid = fork();
-			childPid = getpid();
+			cmdFile = new char[file.size() + 1];    	// string to usable c style string
+			copy(file.begin(), file.end(), cmdFile);	// now i can open files with it
+			cmdFile[file.size()] = '\0';				//
+			
+			parentPid = parent;							// parent pid inside child & parent		
+			pid = fork();								// child pid inside parent
+			if(getpid() == parent) return;				// only child operations
+			pid = getpid();								// child pid in child
 		}
 	};
-
-	void childSync(unsigned int childNo) {
-		//cout << "attempting to sync " << childNo << endl;
-		if(isParent()) return;
-		children[childNo].cmdFile = readPipe(children[childNo].pipe_ends);
-		/* other things to sync go here */
-
-		//cout << "sync complete" << endl;
-	}
+	//child's main loop
 	void childLoop() {
 		if(isParent()) return;
-		unsigned int childNo = whichChild(getpid());
-		//cout << children[childNo].childPid << "["<< childNo << "] test: " ;
-        kill(children[childNo].childPid,SIGTSTP); //wait to sync from parent
-       	childSync(childNo);
-        kill(children[childNo].childPid,SIGTSTP); // wait to begin child main loop
+        stopChild(ea.pid);
 
-        char * file = new char[children[childNo].cmdFile.size() + 1];
-		copy(children[childNo].cmdFile.begin(), children[childNo].cmdFile.end(), file);
-		file[children[childNo].cmdFile.size()] = '\0';
         while(1)
         {    	
-			ifstream inf(file);
-			string cmd, buffer="";
-			int i=0;
-
-			
-			while(inf.is_open() && !inf.eof()) {
-				getline (inf,cmd);
-				if(!inf.eof())
-					buffer += cmd + "\n";
-				i++;
-			}
-			inf.close();
-
-			if(i==1) buffer = "\n  ";
-
-			if(buffer.size())
-			{
-				ofstream ouf(file);
-				ouf << buffer.erase(buffer.size()-1) << flush;
-				ouf.close();
-			}
-        	
-
-			char * executable = new char[cmd.size() + 1];
-			copy(cmd.begin(), cmd.end(), executable);
-			executable[cmd.size()] = '\0';
-
-			cout << "  test " << executable << flush;
-			pid_t exec_pid = fork();
-			if(exec_pid == 0)	execlp("cat", "cat", executable, NULL);
-
-
-        	kill(children[childNo].childPid,SIGTSTP);
+        	cout << "in the child " << ea.pid << endl; 
+        	stopChild(ea.pid);
         }
-        
-	}
-	string readPipe(int *pipes)
-	{
-		int i;
-		close(pipes[1]);
-		char buf[1024];
-		read(pipes[0], &buf, 1024);
-		for(i=0;i<1024;i++) if(buf[i]==0) { buf[i-1] = 0; break; }
-		return buf;
-	}
-	void writePipe(int *pipes, string mes)
-	{
-		close(pipes[0]);
-		FILE *stream;
-		stream = fdopen (pipes[1], "w");
-		fprintf (stream, "%s\n",mes.c_str());
-		fclose (stream);
 	}
 public:
-	pid_t pid, parent;		
-	vector<child> children;
-	childManager(int number_of_children, pid_t parent) {
-		int i=0;
-
-		while(number_of_children--) {
-			if(parent == getpid())
-			{	
-				this->parent = parent;
-				children.push_back(child(i++,_IDLE));
-				if(!isParent()) childLoop(); 
-			}
+	pid_t pid, parent;
+	child ea;
+	// create a new managed child and put it in its main loop
+	childManager(pid_t parent, string file) {
+		if(parent == getpid())
+		{	
+			this->parent = parent;
+			this->ea.initChild(0, _IDLE, file, parent);
+			if(!isParent()) childLoop();
 		}
 	}
-	template<class TYPE> childManager &set(TYPE var) {
-	for(std::vector<child>::size_type i = 0; i != children.size(); i++)
-		switch(setter_index)
-		{
-			case _No	 : break;
-			case _STATUS : break;
-			case _PID	 : break;
-			case _PIPE	 : break;
-			case _cmdFile: children[i].cmdFile = var; break;
-		}
-	return *this;
+	// kill all children
+	void endChild(pid_t pid) {	
+		kill(pid,9);
 	}
-	void sync() {
-		if(!isParent()) return;
-		for(child ea : children)
-		{
-			close(ea.pipe_ends[0]);
-			writePipe(ea.pipe_ends,ea.cmdFile);
-			wakeUpCall(ea.No);
-		}
+	// 1 if parent else 0
+	bool isParent(void) {
+		return (parent == getpid())?1:0;
+	}
+	//send stop signal to child
+	void stopChild(pid_t pid) {
+		//alert("stop child ", pid, " ");
+		if(isParent()) return;
+		kill(pid,SIGTSTP);
+	}
+	//returns 1 if child is alive
+	bool good(void) {
+		int status;
+		waitpid(ea.pid, &status, WNOHANG);
+		return 0;
+	}
+	//makes the child do 1 main loop
+	void wakeup(void) {
+		kill(ea.pid,SIGCONT);
 	}
 	void report() {
 		string s = "";
-		for(child ea : children) 
 		  cout << "Child[" << ea.No << "] PID: " << ea.pid << " STATUS: " << (ea.status?"BUSY":"IDLE") << 
 				  " PIPES ["<<ea.pipe_ends[0]<<"]["<<ea.pipe_ends[1]<<"]" << 
 				  " cmdFile " << ea.cmdFile << endl;
 	}
-	unsigned int whichChild(pid_t pid) {
-		int i = 0;
-		for(child ea : children) {
-			if(ea.childPid == pid) return i;
-			i++;
-		}
-		return 9999;
-	}
-	void endChildren() {
-		for(child ea : children)	
-			kill(ea.pid,9);
-	}
-	bool good() {
-		pid_t res;
-		int status;
-		for(child ea : children)
-			if( waitpid(ea.pid, &status, WNOHANG) )
-				return 0;
-		return 1;
-	}
-	childManager &cmdFile() { this->setter_index = _cmdFile; return *this; } // set the setter return the class instance
-	bool isParent(void) { return (parent == getpid())?1:0; } // 1 if parent else 0
-	void wakeUpAllCall() { for(child ea : children) kill(ea.pid,SIGCONT); } //send SIGCONT to 'ea'ch child
-	void wakeUpCall(unsigned int i) { kill(children[i].pid,SIGCONT); }
 };

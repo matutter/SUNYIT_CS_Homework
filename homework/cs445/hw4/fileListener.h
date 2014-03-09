@@ -12,33 +12,42 @@ class fileListener
 			public:
 			string name;
 			unsigned long long modify;
+			unsigned long int size;
 			unsigned int mode;
 		};
+
 	public:
 	file_ file;
 
 	int addListener(string s) {
 		if(!s.size()) return 0;
 		file.name = s;
-		stat( file.name.c_str(), &st );
-		file.modify = st.st_mtime;
-		file.mode	= st.st_mode;
-		return ( file.modify != _missingFile )? 1 : 0;
+		if( stat( file.name.c_str(), &st )!=0 ) return 0;
+		update();
+		return 1;
 	}
 
 	int listenModify(void) {
-		if(!file.name.size()) return 0;
+		unsigned long long lastModify = 0;
 		while(1)
 		{
-			stat( file.name.c_str(), &st );
-			file.mode	= st.st_mode;
-			if( file.modify == _missingFile ) return 0;
-			if( file.modify != st.st_mtime )
-			{
-				file.modify = st.st_mtime;
-				return 1;
-			}
+			lastModify = file.modify;
+			if(!update()) return 0;					//if cannot find file end
+			if(lastModify != file.modify) return 1; //return 1 if updated
 		}
 		return 0;
+	}
+	bool empty(void) {
+		update();
+		//cout << file.size << "\t" ;
+		if(file.size == 0) return 1;
+		return 0;
+	}
+	bool update(void){
+		if(stat( file.name.c_str(), &st ) != 0) return 0;
+		file.modify = st.st_mtime;
+		file.mode	= st.st_mode;
+		file.size	= st.st_size;
+		return 1;
 	}
 };
