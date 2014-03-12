@@ -23,7 +23,7 @@ int main(int argc, char const *argv[])
 	vector<string> args;
 
 	if (pipe(link)==-1) die("pipe");		// make pipe/close pipe if fail or busy
-	if ((pid = fork()) == -1) die("fork");	//spawn and end execl child
+	if ((pid = fork()) == -1) die("fork");	// make fork/look for bad fork
 
 if(pid == 0)
 {

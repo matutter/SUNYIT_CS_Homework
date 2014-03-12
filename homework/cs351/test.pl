@@ -3,7 +3,7 @@
     use strict;
     use warnings;
     use CGI;
-    use CGI::Carp qw(fatalsToBrowser); # Remove this in production FUCK i totally forgot
+    use CGI::Carp qw(fatalsToBrowser); #qweasdretylarp
     my $q = new CGI;
     my $MIME = new MIME::Types;
 

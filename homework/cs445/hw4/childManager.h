@@ -54,7 +54,46 @@ private:
 
         while(1)
         {    	
-        	cout << "in the child " << ea.pid << endl; 
+        	//cout << "in the child " << ea.pid << endl;
+        	string cmd;
+        	vector<string> buffer;
+        	ifstream stream(ea.cmdFile, std::ofstream::binary);
+			while(stream.is_open() && !stream.eof())
+			{
+				getline (stream,cmd);
+				if(cmd.size() > 0 && cmd != "\n")
+					buffer.push_back(cmd);
+			}
+			stream.close();
+
+			//cout << "#com[" << buffer.size() << "]\t";
+			
+			if(!buffer.empty())
+			{
+				cmd = buffer.back();
+				buffer.pop_back();
+
+
+				ofstream stream2(ea.cmdFile, std::ifstream::binary);
+				stream2.seekp(ios_base::beg);
+				for(string each : buffer) 
+					stream2 << each << endl;
+				
+				//cout << "pos[" << stream2.tellp() << "]\t";	
+				//cout << "cmd["<< cmd << "]" << endl;
+				stream2.close();
+
+			}
+			buffer.clear();
+			fork();
+			if(getpid() != ea.pid) { 
+				//cout << getpid() << endl;
+				char str[12]; // 12 can fit a long int
+				sprintf(str,"%ld",(long)ea.pid);
+				cmd += " > " + string(str) + ".hw4_result";			
+				system(cmd.c_str());
+				kill(getpid(),9);
+			}
         	stopChild(ea.pid);
         }
 	}
@@ -87,12 +126,17 @@ public:
 	//returns 1 if child is alive
 	bool good(void) {
 		int status;
-		waitpid(ea.pid, &status, WNOHANG);
+		//cout << "waiting for stop" << endl;
+		waitpid(ea.pid, &status, WSTOPPED);
+		WIFSTOPPED(status);
+		//cout << "child stopped" << endl;
 		return 0;
 	}
 	//makes the child do 1 main loop
 	void wakeup(void) {
+		
 		kill(ea.pid,SIGCONT);
+		good();
 	}
 	void report() {
 		string s = "";

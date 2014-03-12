@@ -95,7 +95,7 @@ $(document).ready(function(){
 				$('.download').addClass('disabled')
 			}
 			else {
-				$('#code').text(s) //load as text not a file
+				$('#code').html(s.SyntaxHighlight()) //load as text not a file
 				$('.download').removeClass('disabled')
 			}
 		})
@@ -137,3 +137,9 @@ $(document).ready(function(){
 
 
 })
+String.prototype.SyntaxHighlight = function() {
+	//return this.replace(/\</g,"&lt;").replace(/\>/g,"&gt;").replace(/\(/g,'(<pr>').replace(/\)/g,'</pr>)')
+	return this.replace(/\</g,"&lt;").replace(/\>/g,"&gt;")
+	//s = this;
+	//return s
+}

@@ -33,7 +33,10 @@ class fileListener
 		{
 			lastModify = file.modify;
 			if(!update()) return 0;					//if cannot find file end
-			if(lastModify != file.modify) return 1; //return 1 if updated
+			if(lastModify != file.modify) {
+				sleep(1);
+				return 1; 							//return 1 if updated
+			}
 		}
 		return 0;
 	}
