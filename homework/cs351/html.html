@@ -1,0 +1,42 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"rel="stylesheet">
+<style>
+.addon-space
+{
+	width:120px;
+}
+.formwrap
+{
+	position: relative;
+	width: 500px !important;
+}
+.formhead
+{
+	width: 500px;
+	background-color: #d43f3a;
+	border-radius: 3px;
+	padding:2px;
+	font-size: 1.7em;
+	font-weight: 700;
+	margin-bottom: 3px;
+}
+</style>
+<div class="formhead">
+	Step 1! <small>Initialize form!</small>
+	<button name="form1" type="button" class="btn btn-default pull-right">NEXT </button>
+</div>
+<div class="formwrap">
+	<form action="" method="post">
+		<div class="input-group formwrap">
+			<span class="input-group-addon addon-space">Initial Value</span>
+			<input name="init" type="number" class="form-control">
+		</div>
+		<div class="input-group formwrap">
+			<span class="input-group-addon addon-space">Increment</span>
+			<input name="increm" type="number" class="form-control">
+		</div>
+		<div class="input-group formwrap">
+			<span class="input-group-addon addon-space">Number of rows</span>
+			<input name="rows" type="number" class="form-control">
+		</div>
+	</form>
+</div>
