@@ -20,9 +20,6 @@ int  main(void)
 	string	cmdFile;
 	vector<childManager> cm;
 
-	cout << "You will be asked for a file to listen to." << endl << "Then you may type shell commands in that file and save it to run them" << endl;
-
-
 	cout << "Enter name of command file: ";
 	//cin  >> cmdFile;
 	cmdFile = "cmd.file";

@@ -1,0 +1,8 @@
+echo ak
+echo bj
+echo ah
+echo bg
+echo af
+echo bc
+ls -l
+ls -a

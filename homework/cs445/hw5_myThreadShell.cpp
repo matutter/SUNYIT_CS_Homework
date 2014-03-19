@@ -1,6 +1,9 @@
 // g++ version 4.6.3 std=c++0x                             //
 // compiler args:                                          //
 // g++ this.cpp -Wall -fexceptions -std=c++0x -g -lpthread //
+// REQUIRES INOTIFY or include the other filelisten.h class//
+// INOTIFY.H is a *CORE* linux header missing on fang******//
+// INOTIFY.H is included in all current gentoo releases    //
 /////////////////////////////////////////////////////////////
 #include <sys/inotify.h> //filesystem events
 #include <iostream>      //cout/cin
