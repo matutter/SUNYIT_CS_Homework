@@ -2,7 +2,6 @@
 $QKEY = "::";
 $| = 1;
 use CGI qw();
-#use CGI::Cookie;
 my $c = CGI->new;
 my $myfile = "text.file2";
 my $firstLine = 1;
@@ -10,7 +9,7 @@ my $lastLine = $firstLine+1;
 my $next = "checked";
 my $back = "";
 my @j;
-#print "Content-type: text/html\n\n";
+my $last;
 
 if($c->param()) {
 	$myfile = $c->param('file');
@@ -24,6 +23,9 @@ if($c->param()) {
 		$firstLine--;
 		$next = "";
 		$back = "checked";
+		if($firstLine < 0) {
+			$firstLine = 0;
+		}
 	}
 	$cook = $c->cookie(
 		-name => 'PAGE',
@@ -41,22 +43,8 @@ else
 $mystuff;
 if(-e( $myfile )) {
 	open my $info, $myfile or die "Could not open $myfile: $!";
-	#my $slength = 0;
-	#my $maxLength = -s $myfile;
-	my $last;
+
 	while( my $line = <$info>)  {
-		#$slength+=length($line);
-		#if($slength >= $maxLength) {
-		#	$firstLine--;
-		#	$next = "";
-		#	$back = "checked";
-		#	break;
-		#}
-		#print $maxLength . "-" . $slength . "    L";
-		#if ($firstLine eq $.) {
-	    #	$stuff = "[" . $. ."]  " . $line . '<br>';    
-		#}
-	    #last if $. == $lastLine;
 	    @j = jadd(jparse($.,$line), @j);
 	    $last = $.;
 	}
@@ -87,9 +75,10 @@ print '
 <html>
 <br>
 best viewed <a href="homework/cs351/hw6.pl"> here </a> <br>
+HEY! don\'t try to read lines of html with this program! it puts html on the page<br> 
 <div class="col-sm-4">
 	<form method="post" action="">
-		<input  name="line" type="number" value="'.$firstLine.'"> <br>
+		<input  name="line" type="number" max="'.$last.'" value="'.$firstLine.'"> <br>
 		<input  name="file" type="text" value="'.$myfile.'"> <br>
 		<input type="radio" name="dir" '.$back.' value="back">back<br>
 		<input type="radio" name="dir" '.$next.' value="next">next<br>
@@ -140,7 +129,7 @@ sub jname {
 }
 #serialize object
 sub jstringify {
-	my $s = join ",",@_; 
+	my $s = join ",",@_;
 	return "{".$s."}";
 }
 #add an element to front or back (A,B)= AB (B,A) = BA
