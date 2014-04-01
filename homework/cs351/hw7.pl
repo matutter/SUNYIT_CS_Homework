@@ -2,15 +2,15 @@
 $QKEY = "::";
 $| = 1;
 use CGI qw();
-use CGI::Cookie;
+#use CGI::Cookie;
 my $c = CGI->new;
-
 my $myfile = "text.file2";
 my $firstLine = 1;
 my $lastLine = $firstLine+1;
 my $next = "checked";
 my $back = "";
 my @j;
+#print "Content-type: text/html\n\n";
 
 if($c->param()) {
 	$myfile = $c->param('file');
@@ -25,9 +25,18 @@ if($c->param()) {
 		$next = "";
 		$back = "checked";
 	}
+	$cook = $c->cookie(
+		-name => 'PAGE',
+		-value => $firstLine,
+		-expires => '+6m'
+	);
+	print $c->header(-cookie=>$cook); 
 	$lastLine = $firstLine+1;
 }
-
+else
+{
+    $firstLine = $c->cookie('PAGE');
+}
 $mystuff;
 if(-e( $myfile )) {
 	open my $info, $myfile or die "Could not open $myfile: $!";
@@ -65,7 +74,8 @@ print_head();
 
 
 sub print_head {
-print "Content-type: text/html\n\n";
+#print "Content-type: text/html\n\n";
+print $c->header('text/html');
 print '
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"rel="stylesheet">
 <style>
@@ -74,6 +84,9 @@ print '
 <script>
 
 </script>
+</header>
+<html>
+<br>
 best viewed <a href="homework/cs351/hw6.pl"> here </a> <br>
 <div class="col-sm-4">
 	<form method="post" action="">
