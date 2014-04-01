@@ -108,7 +108,7 @@ print '</table>';
 
 sub form1 {
 
-print '
+print ' best viewed at <a href="/homework/cs351/hw5.pl">here</a>
 <div class="formwrap">
 <form action="" method="post">
 <div class="formhead">
@@ -218,21 +218,7 @@ td:nth-child(even) {background: #BBB}
 	}
 	function clearit() { document.getElementById("holder").innerHTML=""; }
 </script>
-<div class="panel panel-default footer">
-  <div class="panel-body">
-    Assignment
-  </div>
-  <div class="panel-footer">
-	<ul>
-		make forms that do this
-		<li>1. form1: a) initial b) incremus c) number of rows</li>
-		<li>2. form2: a) number of cols</li>
-		<li>3. fill table</li>
-		<li>4. allow cols to change</li>
-		<li>5. store values in a 2d array</li>
-	</ul>
-  </div>
-</div>
+
 <br>
 ';
 }
