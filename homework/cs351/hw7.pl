@@ -35,6 +35,7 @@ if($c->param()) {
 }
 else
 {
+	print $c->header('text/html');
     $firstLine = $c->cookie('PAGE');
 }
 $mystuff;
@@ -74,8 +75,6 @@ print_head();
 
 
 sub print_head {
-#print "Content-type: text/html\n\n";
-print $c->header('text/html');
 print '
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"rel="stylesheet">
 <style>
