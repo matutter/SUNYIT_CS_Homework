@@ -25,13 +25,13 @@ elsif($c->param('form2') eq 1) #form2 submitted
 {
 	my $size=2;
 	my $bar_data;
-	my $max;
+	my $max, $max;
 	if(checkDef() eq 1) {
 		$text = $cols . "x" . $rows;
 		@matrix;
-		($bar_data,$max,$x,$y,@matrix) = assemble($init, $increm, $rows, $cols);
+		($bar_data,$min,$max,$x,$y,@matrix) = assemble($init, $increm, $rows, $cols);
 		makeTable($x,$y);
-		print "<br><img src=\"hw8_graph.pl?max=$max&$bar_data\"><br>";
+		print "<br><img src=\"hw8_graph.pl?min=$min&max=$max&cols=$cols&$bar_data\"><br>";
 		#print $bar_data;
 	}
 	else 
@@ -75,6 +75,9 @@ sub checkDef {
 			$def = 1;
 			$cols = $c->param('form1');
 		}
+	}
+	if($rows < 1 || $cols < 1) {
+		$def = 0;
 	}
 	return $def;
 }
@@ -127,7 +130,12 @@ sub assemble {
 	}
 	#print @linear_data;
 	my $bars = join("&",@linear_data);
-	return ($bars,$max,$colsX,$rowsY,@mx);
+	my $min = min(@linear_data);
+	return ($bars,$min,$max,$colsX,$rowsY,@mx);
+}
+sub min {
+    splice(@_, ($_[0] > $_[1]) ? 0 : 1, 1);
+    return ($#_ == 0) ? $_[0] : min(@_);
 }
 sub form1 {
 
