@@ -78,7 +78,18 @@ if($c->param()) {
 
 if($i != 0) {
 
-	print '<div style="position:absolute; height:350px; left:0px; top:25px; width:33%; background-color:#e7e7e7; display:inline-block;"">';
+	print '
+	<style>
+	.box
+	{
+		position:relative;
+		height:350px;
+		
+		background-color:#e7e7e7;
+		display:inline-block;
+	}
+	</style>
+	<div class="box">';
 	print '<form name="form1" id="form1" action="" method="post">';
 
 	print_buttons($choices);
@@ -89,12 +100,12 @@ if($i != 0) {
 	print_hyperlink( $hyperlink );
 	print '
 		</div>
-		<div style="position:absolute; height:350px; left:200px; top:25px; width:33%; background-color:#e7e797; display:inline-block;">';
+		<div class="box">';
 	print '
 	<form name="form2" method="post" action="">
 		<button name="newfile" value="'.$choices.'">Add File</button>
 		<input name="name" placeholder="file name" value="new1.file">
-		<textarea name="msg" style=" margin:2%; width:96%; height:200px;" >New file text!!!</textarea>
+		<textarea name="msg" style=" margin:2%; width:96%; height:304px;" >New file text!!!</textarea>
 	</form>
 	';
 	print '</div>';
@@ -108,9 +119,9 @@ sub create_file {
 	my $file = $directory . "/" . $_[0];
 
 	unless ( open FILE, '>'.$file ) {
-		print $file;
+		#print $file;
 	}
-	print FILE "asdasd";
+	print FILE $_[1];
 	close FILE;
 
 	if( !exists %size_hash->{ $_[0] }   )
