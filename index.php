@@ -24,6 +24,7 @@ else
 <script src="scripts/bootstrap.min.js"></script>
 <script src="scripts/main.js"></script>
 <title>utterm@sunyit.edu</title>
+<author style="background-color:#cb4032; text-align:center; text-transform:uppercase; width:100%;"><a style="color:black; text-decoration:none; width:100%;" href="homework">for cs351 just view all assignments here </a></author>
 </head>
 <body>
 
