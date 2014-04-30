@@ -7,12 +7,17 @@ if($_POST && isset($_POST["loadCodeFile"]) )
 {
 	$fd = 	BASE_PATH . "/" . $_POST["loadCodeFile"];	
 
+	$stupid_fang_fix = "";
 	$handle = @fopen($fd, "r");
 	$line_nums = "";
 	$line_code = "";
 	$ln = 0;
 	$url = 'http://'.$_SERVER['HTTP_HOST'];
-	$link = "<div class=\"col-sm-12 code-title\">View Raw: <a href=\"". $url . "/" . $_POST["loadCodeFile"] ."\">" . $_POST["loadCodeFile"] . "</a> </div>";
+	if( strpos("sunyit",$url) !== false)
+	{
+		$stupid_fang_fix = "~utterm";
+	}
+	$link = "<div class=\"col-sm-12 code-title\">View Raw: <a href=\"". $url . $stupid_fang_fix . "/" . $_POST["loadCodeFile"] ."\">" . $_POST["loadCodeFile"] . "</a> </div>";
 
 	if ($handle) {
 	    while (($buffer = fgets($handle, 4096)) !== false) {
