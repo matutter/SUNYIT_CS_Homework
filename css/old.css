@@ -3,10 +3,9 @@
 	font-family: Eroded;
 	src: url(PressFeelingEroded.ttf);
 }
-
 html
 {
-	background-color:#f7f7f7;
+	background-color:#FDFDFD;
 	overflow-y:scroll;
 }
 body
@@ -24,63 +23,6 @@ nav, header
 header a
 {
 	text-align: center;
-}
-a
-{
-	color: #cd2200;
-}
-#main
-{
-	margin: 0px;
-	padding: 0px;
-}
-a:hover, a:focus
-{
-	color: #272727;
-}
-blockquote
-{
-	vertical-align: top;
-	border-color: #cd2200;
-}
-td:nth-child(odd)
-{
-	text-align: right;
-	font-weight: 700;
-}
-nav, .navbar, .navbar-header
-{
-	background-color: white;
-}
-.files li
-{
-	background-color: #333;
-	padding-right: 15px;
-	padding-left: 15px;
-	overflow: hidden;
-	margin-right: -15px;
-	color: #cd2200;
-	cursor: pointer;
-}
-
-.files li a:hover
-{
-	color: #fefefe;
-	text-decoration: none;	
-}
-.navbar-right
-{
-	margin-right:15px !important;
-}
-.nav-bot
-{
-	background-color: #b42200;
-	padding: 9px;
-	color:white;
-	font-weight: 700;
-	font-size: 1.4em;
-	text-shadow: 1px 1px 2px #000;
-	text-transform: uppercase;
 }
 .major-nav{}
 .icon-bar
@@ -127,27 +69,17 @@ h3
 	overflow-x:hidden;
 	padding:0px;
 	padding-bottom: 15px;
-	min-height: 500px;
 }
 .files
 {
-	margin-left:-15px; 
+	margin-bottom: 15px;
 	padding-left: 0px;
+	background-color: #f3f3f3;
+	border-radius: 2px;
+	padding: 14px;
 	list-style: none;
 	font-weight: 400;
 	font-size: 1.3em;
-}
-.files li:nth-child(1)
-{
-	border:solid 15px #333;
-	border-width: 0px;
-	border-top-width: 15px;
-}
-.files li:nth-last-child(1)
-{
-	border:solid 15px #333;
-	border-width: 0px;
-	border-bottom-width: 15px;
 }
 .files li a
 {
@@ -155,21 +87,16 @@ h3
 }
 .files li:hover
 {
-	background-color: #111;
-	color:#f7f7f7;
+	background-color: #144454;
+
 }
 .files li a:hover
 {
 	text-decoration: none;
-	color:inherit;
+		color:#333;
 }
 .files li:nth-child(odd)
 {
-	
-}
-tiny
-{
-	font-size: 0.7em;
 	
 }
 empty
@@ -181,7 +108,13 @@ empty
 	position: relative;
 	display: block;
 }
+.nav-bot
+{
+	background-color: #0080ff;
+	height: 5px;
+	margin-bottom: 15px !important;
 
+}
 .sub-nav
 {
 	width: 100%;

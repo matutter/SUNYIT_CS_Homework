@@ -6,16 +6,16 @@ function loadPage(s) {
 		data: {loadPage:s},
 		success: function(res) {
 			//alert(res)
-			$('#files').prepend("<ul>")
+			//$('#files').prepend("<ul>")
 			res = res.split(',')
 			if(res.length < 1) {
 				$('#files').prepend("No files")
 				return;
 			}
 			$(res).each(function(i){
-				$('#files').append('<li><a link="homework/'+s+'/'+res[i]+'">'+res[i]+'</a></li>')	
+				$('#files').append('<li link="homework/'+s+'/'+res[i]+'">'+res[i]+'</li>')	
 			})
-			$('#files').append("</ul>")
+			//$('#files').append("</ul>")
 		}
 	})
 }
@@ -81,7 +81,7 @@ function loadCode(link, target) {
 	    url: "scripts/codeformat.php",
 	    data: {"loadCodeFile":link},
 	    success: function(res){
-	    	$('#code').html( res )
+	    	target.html( res )
 	    }
 	})
 }
@@ -102,23 +102,15 @@ $(document).ready(function(){
 	else
 		loadPage(last)
 
-	$('.files').on('click','a',function(){
+	$('.files').on('click','li',function(){
 		link = $(this).attr('link')
 		fname = $(this).text()
-		$('#title').html(fname)
+		$('#title').fadeOut("fast",function(){
+			$(this).html(fname).fadeIn("fast")
+		})
 		$('.download').show()
 		$.get(link, function(s){
-			if(link.match('.pl|.cgi')) {
-				$('#code').html(s)
-				$('.download').addClass('disabled')
-			}
-			else {
-				loadCode(link, $('#code'))
-				//$('#code').html( loadCode( link, fname ) )
-				//alert( loadCode(link,fname) )
-				//$('#code').html((loadCode(link,fname)).SyntaxHighlight()) //load as text not a file
-				$('.download').removeClass('disabled')
-			}
+			loadCode(link, $('#code'))
 		})
 	})
 
@@ -129,17 +121,6 @@ $(document).ready(function(){
 		loadPage(last)
 	})
 
-	$('.download').click(function(){
-		var pom = document.createElement('a')
-		/*if (fname.match('.pl')) { 
-			//alert("Cannot download server side scripts")
-			return
-		}*/ // to stop attempting to download things without URIDATA
-		pom.setAttribute('href', link)
-		pom.setAttribute('download', fname)
-		pom.click()
-	})
-
 	$('#manage, #back').click(function(){
 		$('#main, #back, #manage, #console').toggle()
 	})
@@ -147,9 +128,7 @@ $(document).ready(function(){
 		if($(this).scrollTop() != 0)
 			$('.sub-nav').slideUp()
 	})
-//	$('.nav-bot').click(function(){
-//		$('.sub-nav').slideToggle()
-//	})
+
 	$('nav #login').click(function(){ 
 		if($(this).attr('id') == 'logout') logOut()
 			else $('.login').slideToggle('fast')
@@ -158,9 +137,3 @@ $(document).ready(function(){
 
 
 })
-String.prototype.SyntaxHighlight = function() {
-	//return this.replace(/\</g,"&lt;").replace(/\>/g,"&gt;").replace(/\(/g,'(<pr>').replace(/\)/g,'</pr>)')
-	return this.replace(/\</g,"&lt;").replace(/\>/g,"&gt;")
-	//s = this;
-	//return s
-}

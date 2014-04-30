@@ -12,19 +12,22 @@ if($_POST && isset($_POST["loadCodeFile"]) )
 	$line_code = "";
 	$ln = 0;
 	$url = 'http://'.$_SERVER['HTTP_HOST'];
-	$link = "<div class=\"col-sm-1 code-title\">link:</div><div class=\"col-sm-11 code-title\"><a href=\"". $url . "/" . $_POST["loadCodeFile"] ."\">" . $_POST["loadCodeFile"] . "</a></div>";
+	$link = "<div class=\"col-sm-12 code-title\">View Raw: <a href=\"". $url . "/" . $_POST["loadCodeFile"] ."\">" . $_POST["loadCodeFile"] . "</a> </div>";
 
 	if ($handle) {
 	    while (($buffer = fgets($handle, 4096)) !== false) {
+	    	$buffer = str_replace("<", "&lt;", $buffer);
 	        $line_code .= $buffer . "";
-	        $line_nums .= ++$ln.".\n";
+	        $line_nums .= ++$ln."\n";
 	    }
 	    if (!feof($handle)) {
 	        echo "Error: unexpected fgets() fail\n";
 	    }
 	    fclose($handle);
 
-	    echo  $link . "<div class=\"col-sm-1 line-nums shadow\">" . $line_nums . "</div><div class=\"col-sm-11 line-code\">" . $line_code . "</div>";
+	    $linum = "<div class=\"col-sm-1 line-nums shadow\">" . $line_nums . "</div>";
+	    $body = "<div class=\"col-sm-11 line-code shadow\">" . $line_code . "</div>";
+	    echo  $link . $linum . $body;
 
 	}
 

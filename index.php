@@ -23,8 +23,11 @@ else
 <script src="scripts/jquery-1.11.0.min.js"></script>
 <script src="scripts/bootstrap.min.js"></script>
 <script src="scripts/main.js"></script>
+
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
 <title>utterm@sunyit.edu</title>
-<author style="background-color:#cb4032; text-align:center; text-transform:uppercase; width:100%;"><a style="color:black; text-decoration:none; width:100%;" href="homework">for cs351 just view all assignments here </a></author>
+<!--<author style="background-color:#cb4032; text-align:center; text-transform:uppercase; width:100%;"><a style="color:black; text-decoration:none; width:100%;" href="homework">for cs351 just view all assignments here </a></author>-->
 </head>
 <body>
 
@@ -36,7 +39,7 @@ Sorry! You need to run Javascript to view this page.
 </div>
 
 <header class="navbar navbar-static-top bs-docs-nav" role="banner">
-	<div class="container">
+	<div class="">
 		<div class="navbar-header">
 			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
 			<span class="sr-only">Toggle navigation</span>
@@ -54,119 +57,38 @@ Sorry! You need to run Javascript to view this page.
 				<li id="other"><a href="#other">Other</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" id="manage">Manage</a></li>
-				<li><a href="#" id="back">Back</a></li>
-				<li><a href="#" id="login" tabindex="8">Login</a></li>
 				<li><a href="http://www.github.com/matutter">See my Git</a></li>
 			</ul>
 		</nav>
 	</div>
 </header>
-<!--<div class="sub-nav">
-	<div class="container">
-	    <div class="bs-header" id="content">
-		    <div class="container">
-		    	<div class="col-sm-5">
-		    		<div class="alt-msg">
-				        <h1 class="email"></h1>
-				        <p></p>
-					</div>
-			    </div>
-			    <div class="col-sm-6">
-			    	 empty right side
-			    </div>
-		    </div>
-	    </div>
-	</div>
-</div>-->
-<div class="nav-bot"></div>
-<div class="login">
-	<div class="col-sm-12">
-	<div class="container">
-		<form class="navbar-form navbar-right" id="login" action="" >
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Username" id="login" name="uname" tabindex="9">
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Password" id="login" name="pwd" tabindex="10">
-			</div>
-			<a class="btn btn-default" id="login" tabindex="11">Login</a>
-		</form>
-	</div>
+<div class="nav-bot">
+	<div class="page-heading">
+		<h3 id="title">Homework</h3>
 	</div>
 </div>
 <div class="col-sm-12" id="main">
-	<div class="container">
-		<div class="page-heading">
-			<h3 id="title">Homework</h3>
-			<button class="btn btn-default download">GetSource</button>
+	<div class="">
+		<div class="col-sm-3">
+			
+		<div id="files" class="files">
 		</div>
-	</div>
-
-	<div class="container">
-		<div id="files" class="col-sm-3 files"></div>
-		
-		<div id="code" class="col-sm-9 code" style="white-space:pre; tab-size:4;"></div>
-		
-	</div>
-</div>
-
-<div class="col-sm-12 console" id="console">
-	<div class="mask"></div>
-	<div class="container">
-		<!--<div class="col-sm-3">
-			<div class="page-heading">
-				<h3> Console </h3>
-			</div>
-
-			<input type="text" class="form-control" placeholder="SITNET ID">
-			<input type="password" class="form-control" placeholder="Password">
-		</div>-->
-	
-		<div class="col-sm-8 col-sm-offset-2">
+			<blockquote style="margin-left:-15px;">
 			<table class="table">
-				<thead>
-					<th colspan="10">Class Settings</th>
-					<th> <small class="pull-right">Add classes</small> </th>
-				</thead>
-				<tbody>
-					<tr>
-						<td colspan="0">
-							<button class="btn btn-success">Add Class</button>				
-						</td>
-						<td colspan="10">
-							<input type="text" class="form-control" placeholder="Course">
-						</td>
-					</tr>
-				</tbody>
+			<th colspan="2">Email</th>
+			<tr><td colspan="2">utterm@sunyit.edu</td></tr>
+			<tr><td colspan="2">matutter4@gmail.com</td></tr>
+			<th colspan="2"><strong>Tutoring Hours</strong> <tiny>ends 5/8</tiny></th>
+			<tr><td>mon:</td><td> 12-4p</td></tr>
+			<tr><td>tue:</td><td> 10-12a</td></tr>
+			<tr><td>wed:</td><td> 12-4p</td></tr>
+			<tr><td>thr:</td><td> 10-12a</td></tr>
 			</table>
-
-			<table class="table">
-				<thead>
-					<th colspan="10">Management</th>
-  					<th><small class="pull-right">Edit details and security</small></th>
-				</thead>
-				<tbody>
-					<tr>
-						<td colspan="0">Show Banner</td>
-						<td colspan="10"><button type="button" class="btn btn-primary" data-toggle="button" id="sb">On</button></td>
-					</tr>
-					<tr>
-						<td colspan="0">Display name</td>
-						<td colspan="10"><input type="text" class="form-control" placeholder="display name" id="dn"></td>
-					</tr>
-					<tr>
-						<td colspan="0">Email</td>
-						<td colspan="10"><input type="text" class="form-control" placeholder="email" id="em"></td>
-					</tr>
-					<tr>
-						<td colspan="0">Email sub-text</td>
-						<td colspan="10"><input type="text" class="form-control" placeholder="sub-text" id="st"></td>
-					</tr>				
-				</tbody>
-			</table>			
+			</blockquote>
 		</div>
-
+		<div id="code" class="col-sm-9 code " style="white-space:pre; tab-size:2;"><div class="col-sm-12 code-title">View Raw:</div>
+<empty>Nothing loaded</empty>
+		</div>
 	</div>
 </div>
 

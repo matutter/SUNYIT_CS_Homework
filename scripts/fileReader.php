@@ -10,7 +10,7 @@ if($_POST && isset($_POST["loadPage"]))
 	if (is_dir($log_directory)) {
 		if ($handle = opendir($log_directory)) {
 			while(($file = readdir($handle)) !== FALSE)
-				if($file == "." || $file == ".." || $file == ".gitignore" || preg_match("/\.out/i",$file) ); else
+				if($file == "." || $file == ".." || $file == ".gitignore" || $file == ".htaccess" || !preg_match("/\./i",$file) || preg_match("/\.out/i",$file) ); else
 				//$res .= $file.",";
 			$res[$i++] = $file;
 			closedir($handle);
