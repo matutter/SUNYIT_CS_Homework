@@ -48,21 +48,21 @@ Sorry! You need to run Javascript to view this page.
 		</div>
 		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 			<ul class="nav navbar-nav major-nav">
-				<li class="active" id="cs249"><a href="#">CS249</a></li>
-				<li id="cs351"><a href="#">CS351</a></li>
-				<li id="cs445"><a href="#">CS445</a></li>
-				<li id="other"><a href="#">Other</a></li>
+				<li class="active" id="cs249"><a href="#cs249">CS249</a></li>
+				<li id="cs351"><a href="#cs351">CS351</a></li>
+				<li id="cs445"><a href="#cs445">CS445</a></li>
+				<li id="other"><a href="#other">Other</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" id="manage">Manage</a></li>
 				<li><a href="#" id="back">Back</a></li>
 				<li><a href="#" id="login" tabindex="8">Login</a></li>
-				<li><a href="#">Help</a></li>
+				<li><a href="http://www.github.com/matutter">See my Git</a></li>
 			</ul>
 		</nav>
 	</div>
 </header>
-<div class="sub-nav">
+<!--<div class="sub-nav">
 	<div class="container">
 	    <div class="bs-header" id="content">
 		    <div class="container">
@@ -73,12 +73,12 @@ Sorry! You need to run Javascript to view this page.
 					</div>
 			    </div>
 			    <div class="col-sm-6">
-			    	<!-- empty right side -->
+			    	 empty right side
 			    </div>
 		    </div>
 	    </div>
 	</div>
-</div>
+</div>-->
 <div class="nav-bot"></div>
 <div class="login">
 	<div class="col-sm-12">

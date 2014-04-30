@@ -74,6 +74,18 @@ function logOut() {
 	})
 }
 
+function loadCode(link, target) {
+//	alert( "file " + link )
+	$.ajax({
+	    type: "POST",
+	    url: "scripts/codeformat.php",
+	    data: {"loadCodeFile":link},
+	    success: function(res){
+	    	$('#code').html( res )
+	    }
+	})
+}
+
 
 $(document).ready(function(){
 	var last = "cs249"
@@ -82,7 +94,13 @@ $(document).ready(function(){
 	$('.download, #back, #console, .login').hide()
 	$('.console input, .console button').prop('disabled', true)
 	//initUser()
-	loadPage(last)
+	if(window.location.hash) {
+		var hash = window.location.hash.substring(1);
+		loadPage(hash)
+		$('#'+hash).addClass('active').siblings().removeClass('active')
+	}
+	else
+		loadPage(last)
 
 	$('.files').on('click','a',function(){
 		link = $(this).attr('link')
@@ -95,7 +113,10 @@ $(document).ready(function(){
 				$('.download').addClass('disabled')
 			}
 			else {
-				$('#code').html(s.SyntaxHighlight()) //load as text not a file
+				loadCode(link, $('#code'))
+				//$('#code').html( loadCode( link, fname ) )
+				//alert( loadCode(link,fname) )
+				//$('#code').html((loadCode(link,fname)).SyntaxHighlight()) //load as text not a file
 				$('.download').removeClass('disabled')
 			}
 		})
@@ -126,9 +147,9 @@ $(document).ready(function(){
 		if($(this).scrollTop() != 0)
 			$('.sub-nav').slideUp()
 	})
-	$('.nav-bot').click(function(){
-		$('.sub-nav').slideToggle()
-	})
+//	$('.nav-bot').click(function(){
+//		$('.sub-nav').slideToggle()
+//	})
 	$('nav #login').click(function(){ 
 		if($(this).attr('id') == 'logout') logOut()
 			else $('.login').slideToggle('fast')
