@@ -1,0 +1,139 @@
+;MAT RUNNER!!! 
+
+#config scanner=0
+#config armor=5
+
+#def	col
+#def	row
+#def	col_mask
+#def	row_mask
+#def	cell
+
+
+!main
+	int	i_locate
+	div	ex,	200 ;  columns
+	mov	col,	ex
+	div	fx,	200 ;creates 40 rows
+	mov	row,	fx
+
+	mov	col_mask,	1
+	shl	col_mask,	col
+	
+	mov	row_mask,	16
+	shl	row_mask,	row
+	
+	mov	cell,	col_mask
+	or	cell,	row_mask
+	
+	err	cell
+	jmp	cell
+
+;;;;;;;
+; DEFAULT :)
+
+	opo p_steering,	128
+	del 50
+	jmp	!drive
+	
+	
+;;;;;;;;;;;;;;;;;
+;NORTH
+:33
+:65
+:72
+:129
+:136
+:257
+:264
+
+
+;err 0;
+	mov	ax,	0
+	call	!compy
+	jmp	!drive
+	
+;;;;;;;;;;;;;;;;;
+;SOUTH
+:16
+:34
+:48
+:66
+:80
+:132
+:144
+;err 1
+	mov	ax,	128
+	call	!compy
+	jmp	!drive
+	
+;;;;;;;;;;;;;;;;;;;
+;EAST
+:17
+:18
+:20
+:24
+:130
+;err 2
+	mov	ax,	64
+	call	!compy
+	jmp	!drive
+	
+;;;;;;;;;;;;;;;;
+;WEST
+:36
+:40
+:258
+:260
+:272
+;err 3
+	mov	ax,	192
+	call	!compy
+	jmp	!drive
+	
+	
+;;;;;;;;;;;;;;;;
+; MIDDLE... if in middle go north 
+	#msg  if(mid==TRUE) go N
+	
+:68
+;err 4
+	jmp	33
+	
+!drive
+	opo	p_throttle, 100
+	;ipo	p_rand,	ax
+	;and	ax,	01FFh
+	;del	ax
+	del	50
+	cmp	@0	0
+	je		!KILL ;; if i get stuck on a person KILL THEM! 
+	jmp	!main
+
+;;;;;;;;;;;;;;;;;
+; COMPY
+;
+; INPUT: ax is the target compass direction	
+
+!compy
+	sub	ax,	@1
+	opo	p_steering,	ax
+	del	50
+	ret
+	
+!KILL
+	do 15
+	opo	15 
+	loop !KILL
+	opo	p_throttle, 100
+	!drive
+	
+
+
+
+
+
+
+	
+	
+	

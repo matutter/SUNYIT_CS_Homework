@@ -13,9 +13,9 @@ if($_POST && isset($_POST["loadCodeFile"]) )
 	$line_code = "";
 	$ln = 0;
 	$url = 'http://'.$_SERVER['HTTP_HOST'];
-	if( strpos("sunyit",$url) !== false)
+	if( strpos($url,"sunyit") !== false)
 	{
-		$stupid_fang_fix = "~utterm";
+		$stupid_fang_fix = "/~utterm";
 	}
 	$link = "<div class=\"col-sm-12 code-title\">View Raw: <a href=\"". $url . $stupid_fang_fix . "/" . $_POST["loadCodeFile"] ."\">" . $_POST["loadCodeFile"] . "</a> </div>";
 

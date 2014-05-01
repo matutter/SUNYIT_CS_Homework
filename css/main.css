@@ -42,6 +42,9 @@ blockquote
 {
 	vertical-align: top;
 	border-color: #cd2200;
+	background-color: transparent;
+	border-top: 5px solid !important;
+	margin-right: -15px;
 }
 td:nth-child(odd)
 {
@@ -82,6 +85,14 @@ nav, .navbar, .navbar-header
 	text-shadow: 1px 1px 2px #000;
 	text-transform: uppercase;
 }
+.nav-bot-cool
+{
+	width: 100%;
+	height: ;
+	border: 5px solid #333;
+	border-top-color: #cd2200;
+	border-bottom-width: 0px;
+}
 .major-nav{}
 .icon-bar
 {
@@ -89,7 +100,19 @@ nav, .navbar, .navbar-header
 }
 .active
 {
-	background-color: #f1f1f1;
+	background-color: #b42200;
+	color:white;
+	border-bottom: 1px solid #b42200;
+	margin-bottom: -1px;
+	box-shadow: inset 0px 4px 3px RGBA(0,0,0,0.4);
+}
+.active a
+{
+	color:white;
+}
+.active a:hover
+{
+	background-color: #333 !important;
 }
 .panel
 {
@@ -139,10 +162,9 @@ h3
 }
 .files li:nth-child(1)
 {
-	border:solid 15px #333;
-	border-width: 0px;
-	border-top-width: 15px;
+	border-top: 5px solid #333;
 }
+
 .files li:nth-last-child(1)
 {
 	border:solid 15px #333;
@@ -170,7 +192,7 @@ h3
 tiny
 {
 	font-size: 0.7em;
-	
+
 }
 empty
 {

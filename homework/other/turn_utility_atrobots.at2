@@ -1,0 +1,38 @@
+;how long to wait
+
+#def	turn
+#def	hold
+mov	turn	66
+mov	hold	0
+
+	#msg	i want to turn 66R
+
+; face north
+	mov	ax,	@1
+	neg	ax
+	opo	p_steering, ax
+	del 100
+	
+!hitwall
+opo		11		100
+	
+	cmp	@0		0
+	jne		!hitwall
+
+!try
+	mov	ax,	@1
+	neg	ax
+	opo	p_steering, ax
+	del 100
+
+	inc		hold
+	opo		14		turn
+	del		hold
+	opo		11		100
+	cmp	@0		0
+	je			!try
+	
+!say
+	err		hold
+	del 500
+		jmp !say

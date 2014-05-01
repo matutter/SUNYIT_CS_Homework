@@ -51,7 +51,9 @@ Sorry! You need to run Javascript to view this page.
 		</div>
 		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 			<ul class="nav navbar-nav major-nav">
-				<li class="active" id="cs249"><a href="#cs249">CS249</a></li>
+				<li class="active" id="cs108"><a href="#cs108">CS108</a></li>
+				<li id="cs240"><a href="#cs240">CS240</a></li>
+				<li id="cs249"><a href="#cs249">CS249</a></li>
 				<li id="cs351"><a href="#cs351">CS351</a></li>
 				<li id="cs445"><a href="#cs445">CS445</a></li>
 				<li id="other"><a href="#other">Other</a></li>
@@ -67,13 +69,17 @@ Sorry! You need to run Javascript to view this page.
 		<h3 id="title">Homework</h3>
 	</div>
 </div>
+<div class="nav-bot-cool">
+</div>
 <div class="col-sm-12" id="main">
-	<div class="">
-		<div class="col-sm-3">
-			
-		<div id="files" class="files">
+
+		<div id="code" class="col-sm-9 code " style="white-space:pre; tab-size:2;"><div class="col-sm-12 code-title">View Raw:</div>
+<empty>Nothing loaded</empty>
 		</div>
-			<blockquote style="margin-left:-15px;">
+	<div class="col-sm-3">
+		<div id="files" class="files"></div>
+
+		<blockquote style="margin-left:-15px;">
 			<table class="table">
 			<th colspan="2">Email</th>
 			<tr><td colspan="2">utterm@sunyit.edu</td></tr>
@@ -84,11 +90,7 @@ Sorry! You need to run Javascript to view this page.
 			<tr><td>wed:</td><td> 12-4p</td></tr>
 			<tr><td>thr:</td><td> 10-12a</td></tr>
 			</table>
-			</blockquote>
-		</div>
-		<div id="code" class="col-sm-9 code " style="white-space:pre; tab-size:2;"><div class="col-sm-12 code-title">View Raw:</div>
-<empty>Nothing loaded</empty>
-		</div>
+		</blockquote>
 	</div>
 </div>
 

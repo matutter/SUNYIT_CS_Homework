@@ -1,0 +1,40 @@
+; beet by mat
+
+        int     I_KEEPSHIFT     ;keeps shift on, might be wrong
+!begin
+        do		4
+
+!flipT
+        opo     P_TROTATE     64     ; rotate turret by half
+		jmp		!start
+!left
+		neg		cx
+		jmp		!panscan
+		
+!start
+		err 1
+        opo		P_ARC			32     ; set 1/4
+        ipo		P_SCAN		fx      ; scan 
+		cmp	fx				1500
+		ja			!flipT			; if no one is there flip it
+
+		ipo		P_ACCURACY	dx ;determine if its left of the 0 pentette
+		cmp	dx						0
+		jls		!left
+
+!panscan
+        opo			P_ARC				2			; set arc smaller and pan
+		opo			P_TROTATE	cx		;IMPORTANT
+		ipo			P_SCAN			fx      ; Scan for enemy
+		cmp		fx					1500
+		JGR			!panscan			;if nothin pan
+		
+do	12
+!fire
+		opo     15    @3      ; else fire
+		loop !fire
+		
+!hot
+		ipo		P_HEAT		fx
+		cmp		fx		213 
+		jgr			!hot

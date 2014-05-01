@@ -1,9 +1,9 @@
 function loadPage(s) {
-	//alert(s)
+	var part = s.split('&')
 	$.ajax({
 		type: "POST",
 		url: "scripts/fileReader.php",
-		data: {loadPage:s},
+		data: {loadPage:part[0]},
 		success: function(res) {
 			//alert(res)
 			//$('#files').prepend("<ul>")
@@ -15,7 +15,7 @@ function loadPage(s) {
 			$(res).each(function(i){
 				$('#files').append('<li link="homework/'+s+'/'+res[i]+'">'+res[i]+'</li>')	
 			})
-			//$('#files').append("</ul>")
+			//oadCode(part[1], $('#code'))
 		}
 	})
 }

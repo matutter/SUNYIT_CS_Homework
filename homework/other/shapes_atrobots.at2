@@ -1,0 +1,120 @@
+;mat's robot hw #1	half half credit?!?! :D
+
+#config weapon=0   
+#config scanner=0  
+#config heatsinks=0
+#config mines=5
+	mov	dx	100
+	mov	fx	@1; get dir
+	neg 			fx ; flip it
+	opo		14	fx ; steer that much
+
+	#def	contr
+	mov	contr		0
+
+!drive
+inc		contr
+err		contr
+jmp		contr
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;circle
+:1
+:10
+opo		11		0  	
+del		100
+
+!cirlce
+	opo		22		1
+do 128
+!shape1
+	opo		14		2 ; turn 2 degrees 128 times
+	opo		11		100 
+		loop		!shape1
+jmp !drive
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;circle
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 16 side shape
+:2
+:9
+opo		11		0  	
+del		100
+
+
+!sides16
+	opo		22		1
+do 16
+!shape2
+	opo		11		0 
+	del		dx
+	opo		14		16   ; turn 16 degrees 16 times
+	del		dx
+	opo		11		100 
+	del		68 ; ten times the turn diveded by 2 minus 4 for opo
+		loop		!shape2
+jmp !drive
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 16 side shape	
+		
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 8 side shape	
+:3
+:8
+opo		11		0  	
+del		100		
+
+!sides 8
+	opo		22		1
+do 8
+!shape3
+	opo		11		0 
+	del		dx
+	opo		14		32   ; turn 32 degrees 8 times
+	del		dx
+	opo		11		100  
+	del		148
+		loop		!shape3
+jmp !drive
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 8 side shape
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 4 side square
+:4
+:7
+opo		11		0  	
+del		100
+
+!sides4
+	opo		22		1
+do	4
+!shape4
+	opo		11		0 
+	del		dx
+	opo		14		64   ; turn 64 degrees 2 times
+	del		dx
+	opo		11		100  
+	del		308
+		loop		!shape4
+jmp !drive
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 4 side square	
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 2 side ray	
+:5
+:6
+opo		11		0  	
+del		100
+
+!sides2
+	opo		22		1
+do	2
+!shape5
+	opo		11		0 
+	del		100
+	opo		14		128   ; turn 64 degrees 2 times
+	del		100
+	opo		11		100  
+	del		308
+		loop		!shape5
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 2 side ray	
+	opo		11		0 
+del 400
+jmp !drive
+:11
+mov	contr		0
+jmp		!drive

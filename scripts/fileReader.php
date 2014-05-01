@@ -10,7 +10,7 @@ if($_POST && isset($_POST["loadPage"]))
 	if (is_dir($log_directory)) {
 		if ($handle = opendir($log_directory)) {
 			while(($file = readdir($handle)) !== FALSE)
-				if($file == "." || $file == ".." || $file == ".gitignore" || $file == ".htaccess" || !preg_match("/\./i",$file) || preg_match("/\.out/i",$file) ); else
+				if($file == "." || $file == ".." || preg_match("/\.git/",$file) || $file == ".htaccess" || !preg_match("/\./i",$file) || preg_match("/\.out/i",$file) ); else
 				//$res .= $file.",";
 			$res[$i++] = $file;
 			closedir($handle);
@@ -18,7 +18,12 @@ if($_POST && isset($_POST["loadPage"]))
 		sort($res);
 		$res = implode(",",$res);
 		$res = rtrim($res,",");
-	    echo $res;
+		if($i == 0)
+		{
+			echo "Empty";
+		}
+		else
+		    echo $res;
 	}
 	else
 		echo $log_directory . " not found.";
