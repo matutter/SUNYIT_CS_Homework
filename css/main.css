@@ -1,12 +1,11 @@
 html
 {
-	background-color:#f7f7f7;
-	overflow-y:scroll;
 }
 body
 {
-  width: 100%;
-  margin: auto;
+	width: 100%;
+	margin: auto;
+	background-color:#f7f7f7;
 }
 nav, header
 {
