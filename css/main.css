@@ -38,6 +38,15 @@ blockquote
 	border-top: 5px solid !important;
 	border-bottom: 5px solid transparent !important;
 	margin-right: -15px;
+	margin-left: -16px;
+}
+.files
+{
+	margin-left:-16px; 
+	padding-left: 0px;
+	list-style: none;
+	font-weight: 400;
+	font-size: 1.3em;
 }
 td:nth-child(odd)
 {
@@ -144,14 +153,6 @@ h3
 	padding:0px;
 	padding-bottom: 15px;
 	min-height: 500px;
-}
-.files
-{
-	margin-left:-15px; 
-	padding-left: 0px;
-	list-style: none;
-	font-weight: 400;
-	font-size: 1.3em;
 }
 .files li:nth-child(1)
 {

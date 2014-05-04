@@ -79,7 +79,7 @@ Sorry! You need to run Javascript to view this page.
 	<div class="col-sm-3">
 		<div id="files" class="files"></div>
 
-		<blockquote style="margin-left:-15px;">
+		<blockquote >
 			<table class="table">
 			<th colspan="2">Email</th>
 			<tr><td colspan="2">utterm@sunyit.edu</td></tr>
