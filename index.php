@@ -59,7 +59,7 @@ Sorry! You need to run Javascript to view this page.
 				<li id="other"><a href="#other">Other</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="http://www.github.com/matutter">See my Git</a></li>
+				<li><a href="http://www.github.com/matutter">See my Git <img height="15" width="15" style="margin-top:-3px;" src="images/git.png"> </a></li>
 			</ul>
 		</nav>
 	</div>
