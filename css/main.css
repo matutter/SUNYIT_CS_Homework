@@ -114,7 +114,8 @@ nav, .navbar, .navbar-header
 }
 .active a:hover
 {
-	background-color: #333 !important;
+	background-color: #b42200 !important;
+	box-shadow: inset 0px 10px 16px RGBA(0,0,0,0.4);
 }
 .panel
 {
