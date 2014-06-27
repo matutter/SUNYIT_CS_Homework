@@ -11,6 +11,7 @@ mat@codemassively.com is my effective email.
 
 SUNYIT_student
 ----------------
+[See this code LIVE at my SUNYIT student page.](http://web.cs.sunyit.edu/~utterm/ "live page for this repo")
 ```
 CS Undergraduate
 SUNYIT
