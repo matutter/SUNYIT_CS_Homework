@@ -1,5 +1,5 @@
 
-Hi I'm mat
+Hi I'm Mat (really spelt like that)   
 --------------
 I'm a software engineer. I've worked in the Telecom and Security industries.  I’m a polyglot. I write a lot of Python, C, and JS for fun. I’m also an embedded software developer and I make robots.  If you’re going to hire me don’t look here; this isn’t the good stuff. 
 
